@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
-const URI      = 'mongodb://localhost/projectefinal';
+const URI      = 'mongodb://localhost:27017/projectefinal';
 
-mongoose.connect(URI)
+mongoose.connect(URI, {useNewUrlParser: true})
     .then(db => console.log('Connectats a la BD'))
     .catch(err => console.error(err));
 
