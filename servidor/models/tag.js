@@ -12,6 +12,6 @@ const tagSchema = Schema ({
         type: Schema.Types.ObjectId, ref: 'Homework'
     }]
 });
-tagSchema.pluguin(uniqueValidator);
+tagSchema.plugin(uniqueValidator);
 
 mongoose.model('Tag', tagSchema);

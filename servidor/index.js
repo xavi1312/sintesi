@@ -25,10 +25,11 @@ app.use((err, req, res, next) => {
       res.status(401);
       res.json({"message" : `${err.name}: ${err.message}`});
     }
-  });
+});
 
 // Routes
 app.use('/api/auth', require('./routes/auth.routes'));
+app.use('/api/tags', require('./routes/tags.routes'));
 
 // Strarting the server
 app.listen(app.get('port'), () => {

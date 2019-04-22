@@ -21,10 +21,10 @@ const homeworkSchema = Schema ({
     alert: {
         type: Date
     },
-    userTohomework: {
+    user: {
         type: Schema.Types.ObjectId, ref: 'User'
     },
-    homeworkTotag: [{
+    tag: [{
         type: Schema.Types.ObjectId, ref: 'Tag'
     }]
 });
