@@ -2,8 +2,10 @@ const express = require('express');
 const app     = express();
 const morgan  = require('morgan');
 const path    = require('path');
+var passport = require('passport');
 
 const { mongoose } = require('./database');
+require('./config/passport');
 
 // Static field (angular compiled)
 
@@ -13,6 +15,7 @@ app.set('port', process.env.PORT || 3000);
 // Middlewares
 app.use(morgan('dev'));
 app.use(express.json());
+app.use(passport.initialize());
 
 // Routes
 app.use('/api/auth', require('./routes/auth.routes'));
