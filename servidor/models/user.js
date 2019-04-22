@@ -39,7 +39,7 @@ userSchema.methods.generateJWT = () => {
         email: this.email,
         name: this.name,
         exp: parseInt(expiry.getTime() / 1000),
-      }, "Projecte_FINAL");
+      }, "PROJECTE_FINAL");
     return jwt;
 };
 

@@ -16,6 +16,12 @@ app.set('port', process.env.PORT || 3000);
 app.use(morgan('dev'));
 app.use(express.json());
 app.use(passport.initialize());
+app.use((err, req, res, next) => {
+    if (err.name === 'UnauthorizedError') {
+      res.status(401);
+      res.json({"message" : `${err.name}: ${err.message}`});
+    }
+  });
 
 // Routes
 app.use('/api/auth', require('./routes/auth.routes'));
