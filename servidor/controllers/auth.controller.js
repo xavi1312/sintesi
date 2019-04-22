@@ -43,5 +43,17 @@ authCtrl.login = (req, res) => {
     }
   })(req, res);
 };
+authCtrl.profileRead = (req, res) => {
+  // Si la id del usuari no existeix en el JWT retorna un 401
+  if (!req.payload._id) {
+    res.status(401).json({
+      message: "UnauthorizedError: private profile"
+    });
+  } else {
+    User.findById(req.payload._id).exec(function(err, user) {
+      res.status(200).json(user);
+    });
+  }
+};
 
 module.exports = authCtrl;
