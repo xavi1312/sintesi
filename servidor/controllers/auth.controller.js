@@ -1,10 +1,17 @@
 const passport = require("passport");
 const mongoose = require("mongoose");
-const User = require('../models/user');
+//const User = require('../models/user');
+const User = mongoose.model("User");
 
 const authCtrl = {};
 
 authCtrl.register = (req, res) => {
+  if (!req.body.name || !req.body.email || !req.body.password) {
+    sendJSONresponse(res, 400, {
+      message: "All fields required"
+    });
+    return;
+  }
   var user = new User();
 
   user.name = req.body.name;
@@ -13,6 +20,13 @@ authCtrl.register = (req, res) => {
   user.setPassword(req.body.password);
 
   user.save(err => {
+    if (err) {
+      res.status(500);
+      res.json({
+        message: "hi ha hagut un error",
+        error: err
+      });
+    }
     var token = user.generateJwt();
     res.status(200);
     res.json({
@@ -20,10 +34,15 @@ authCtrl.register = (req, res) => {
     });
   });
 };
-authCtrl.login = (req, res) => {
-  passport.authenticate("local", (err, user, info) => {
+authCtrl.login = (req, res, next) => {
+  if (!req.body.email || !req.body.password) {
+    res.json({
+      message: "All fields required"
+    });
+    return;
+  }
+  passport.authenticate('local', function(err, user, info) {
     var token;
-
     // Si hi ha algun error amb Passport
     if (err) {
       res.status(404).json(err);
@@ -41,7 +60,7 @@ authCtrl.login = (req, res) => {
       // Si usuari no fuciona
       res.status(401).json(info);
     }
-  })(req, res);
+  })(req, res, next);
 };
 authCtrl.profileRead = (req, res) => {
   // Si la id del usuari no existeix en el JWT retorna un 401
@@ -55,5 +74,10 @@ authCtrl.profileRead = (req, res) => {
     });
   }
 };
+authCtrl.totsUsuaris = (req,res) => {
+  User.find({}).exec((err,user) => {
+    res.status(200).json(user);
+  })
+}
 
 module.exports = authCtrl;

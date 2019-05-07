@@ -6,7 +6,7 @@ const homeworkSchema = Schema ({
         type: String,
         required: true
     },
-    constent: {
+    content: {
         type: String,
         required: true
     },
