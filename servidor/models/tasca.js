@@ -1,32 +1,32 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const homeworkSchema = Schema ({
-    name: {
+const tascaSchema = new Schema ({
+    nom: {
         type: String,
         required: true
     },
-    content: {
+    contingut: {
         type: String,
         required: true
     },
-    done: {
+    acabada: {
         type: Boolean,
         default: false
     },
-    createDate: {
+    dataCreacio: {
         type: Date,
         default: Date.now
     },
-    alert: {
+    alarma: {
         type: Date
     },
-    user: {
-        type: Schema.Types.ObjectId, ref: 'User'
+    usuari: {
+        type: Schema.Types.ObjectId, ref: 'Usuari'
     },
-    tag: [{
-        type: Schema.Types.ObjectId, ref: 'Tag'
+    etiquetes: [{
+        type: Schema.Types.ObjectId, ref: 'Etiqueta'
     }]
 });
 
-mongoose.model('Homework', homeworkSchema);
+module.exports = mongoose.model('Tasca', tascaSchema);

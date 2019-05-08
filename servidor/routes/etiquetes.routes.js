@@ -1,9 +1,8 @@
 const express = require('express');
 const router  = express.Router();
 var jwt = require('express-jwt');
-var auth = jwt({secret: 'PROJECTE_FINAL', userProperty: 'payload'});
 
-const tagCtrl = require('../controllers/tag.controller');
+const tagCtrl = require('../controllers/tasca.controller');
 
 router.get('/', tagCtrl.getAll);
 /*router.get('/id=:id', tagCtrl.getTag);

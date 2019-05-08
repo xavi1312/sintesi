@@ -1,32 +1,37 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+const bcrypt = require('bcrypt');
 const uniqueValidator = require('mongoose-unique-validator');
-const crypto = require('crypto');
-const jwt = require('jsonwebtoken');
 
-const userSchema = Schema({
-    name: {
-        type: String,
-        required: true
-    },
+const usuariSchema = new Schema({
     email: {
         type: String,
         unique: true,
+        lowercase: true,
         required: true
     },
-    password: {
+    contrasenya: {
         type: String,
-        required: true
+        required: true,
+        select: false
     },
-    userTohomework: [{
-        type: Schema.Types.ObjectId, ref: 'Homework'
+    tasques: [{
+        type: Schema.Types.ObjectId, ref: 'Tasca'
     }],
 });
 
-userSchema.methods.setPassword = (password) => {
-    this.salt = crypto.randomBytes(16).toString('hex');
-    this.hash = crypto.pbkdf2Sync(password, this.salt, 1000, 64, 'sha512').toString('hex');
+usuariSchema.methods.setPassword = (password) => {
+    bcrypt.genSalt(10, (err, salt) => {
+        if(err) return err
+
+        bcrypt.hash(password, salt, (err, hash) => {
+            if(err) return err
+
+            this.contrasenya = hash;
+        })
+    })
 };
+/*
 userSchema.methods.validPassword = (password) => {
     console.log(password)
     var hash = crypto.pbkdf2Sync(password, this.salt, 1000, 64, 'sha512').toString('hex');
@@ -45,6 +50,6 @@ userSchema.methods.generateJwt = () => {
       }, "PROJECTE_FINAL");
     return token;
 };
-
-userSchema.plugin(uniqueValidator);
-mongoose.model('User', userSchema);
+*/
+usuariSchema.plugin(uniqueValidator);
+module.exports = mongoose.model('Usuari', usuariSchema);
