@@ -41,26 +41,7 @@ authCtrl.login = (req, res, next) => {
     });
     return;
   }
-  passport.authenticate('local', function(err, user, info) {
-    var token;
-    // Si hi ha algun error amb Passport
-    if (err) {
-      res.status(404).json(err);
-      return;
-    }
-
-    // Si l'usuari funciona
-    if (user) {
-      token = user.generateJwt();
-      res.status(200);
-      res.json({
-        token: token
-      });
-    } else {
-      // Si usuari no fuciona
-      res.status(401).json(info);
-    }
-  })(req, res, next);
+  
 };
 authCtrl.profileRead = (req, res) => {
   // Si la id del usuari no existeix en el JWT retorna un 401

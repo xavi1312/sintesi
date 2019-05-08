@@ -14,11 +14,13 @@ const userSchema = Schema({
         unique: true,
         required: true
     },
+    password: {
+        type: String,
+        required: true
+    },
     userTohomework: [{
         type: Schema.Types.ObjectId, ref: 'Homework'
     }],
-    hash: String,
-    salt: String
 });
 
 userSchema.methods.setPassword = (password) => {
