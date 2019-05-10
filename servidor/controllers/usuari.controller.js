@@ -9,7 +9,6 @@ authCtrl.register = async (req, res) => {
 
   const user = new User({ email: req.body.email, contrasenya: pass })
 
-  console.log(user);
   user.save((err) => {
     if(err) res.status(500).send({message: `s'ha produït un error al guardar l'usuari: ${err}`});
 
@@ -17,7 +16,8 @@ authCtrl.register = async (req, res) => {
   });
 
 };
-authCtrl.login = (req, res, next) => {
+authCtrl.login = (req, res) => {
+  console.log(req.header)
   User.find({ email: req.body.email }, (err, user) => {
     if(err) return res.status(500).send({ message: err });
     if(!user) return res.status(404).send({ message: 'No existeix lusuari' });
