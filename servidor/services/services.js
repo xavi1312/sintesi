@@ -1,6 +1,7 @@
 const jwt = require('jwt-simple');
 const moment = require('moment');
 const config = require('../config/config')
+const bcrypt = require('bcrypt');
 
 const services = {}
 
@@ -36,6 +37,14 @@ services.decodeToken = (token) => {
     })
 
     return descodificat;
+}
+
+services.encodePassowrd = (password) => {
+    const hash = bcrypt.hash(password, 10).then((res) => {
+        return res
+    })
+    
+    return hash;
 }
 
 module.exports = services;
