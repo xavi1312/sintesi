@@ -4,6 +4,7 @@ const service = require('../services/services');
 
 const authCtrl = {};
 
+/** Registre d'un usuari */
 authCtrl.register = async (req, res) => {
   const pass = await service.encodePassowrd(req.body.contrasenya);
 
@@ -16,16 +17,16 @@ authCtrl.register = async (req, res) => {
   });
 
 };
+
+/** Login d'un usuari */
 authCtrl.login = (req, res) => {
   console.log(req.header)
   User.find({ email: req.body.email }, (err, user) => {
     if(err) return res.status(500).send({ message: err });
-    if(!user) return res.status(404).send({ message: 'No existeix lusuari' });
+    if(!user) return res.status(404).send({ message: `No existeix l'usuari` });
 
     req.user = user;
-    res.status(200).send({
-      token: service.createToken(user)
-    })
+    res.status(200).send({ token: service.createToken(user) })
   })
 };
 
