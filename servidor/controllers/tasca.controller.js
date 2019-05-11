@@ -6,7 +6,7 @@ const tascaCtrl = {};
 tascaCtrl.getAll = (req, res) => {
 
     Tasca.find({usuari: req.user.sub, acabada: false}, (err, tasques) => {
-        if (err) return res.status(404).send({message: `No s'ha trobat l'ususari: ${err}`})
+        if(err) return res.status(404).send({message: `No s'ha trobat l'ususari: ${err}`})
 
         res.status(200).send(tasques);
     });
@@ -14,11 +14,11 @@ tascaCtrl.getAll = (req, res) => {
 
 /** Retornar una sola tasca */
 tascaCtrl.unaTasca = (req, res) => {
-    const idTasca = req.params.id;
+    const idTasca = req.params.idTasca;
 
     Tasca.find({usuari: req.user.sub, acabada: false, _id: idTasca}, (err, tasca) => {
-        if (err) return res.status(500).send({message: `Hi ha hagut un problema al fer la petició: ${err}`}) 
-        else if (!tasca) return req.status(404).send({message: `La Tasca no existeix`}) 
+        if(err) return res.status(500).send({message: `Hi ha hagut un problema al fer la petició: ${err}`}) 
+        else if(!tasca) return req.status(404).send({message: `La Tasca no existeix`}) 
 
         res.status(200).send({tasca}) 
     });
@@ -42,9 +42,21 @@ tascaCtrl.novaTasca = (req, res) => {
     });
 }
 
+/** Sobreescriure la tasca */
+tascaCtrl.sobreEscriureTasca = (req, res) => {
+    const idTasca = req.params.idTasca
+    const novaTasca = req.body
+
+    Tasca.findByIdAndUpdate(idTasca, novaTasca, (err, tascaActualitzada) => {
+        if(err) return res.status(500).send({message: `Error al actualitzar la tasca: ${err}`})
+
+        res.status(200).send(tascaActualitzada)
+    })
+}
+
 /** Esborrar una sola tasca */
 tascaCtrl.esborrarTasca = async (req, res) => {
-    const idTasca = req.params.id;
+    const idTasca = req.params.idTasca;
     Tasca.findByIdAndRemove(idTasca, (err) => {
         if(err) return res.status(500).send({message: `Error al trobar i borrar la tasca: ${err}`});
         
