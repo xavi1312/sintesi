@@ -12,7 +12,7 @@ app.use(express.json());
 
 // Routes
 app.use('/api/auth', require('./routes/usuari.routes'));
-//app.use('/api/tags', require('./routes/etiquetes.routes'));
+app.use('/api/etiquetes', require('./routes/etiquetes.routes'));
 app.use('/api/tasques', require('./routes/tasques.routes'));
 
 module.exports = app;

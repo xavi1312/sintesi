@@ -1,12 +1,16 @@
 const express = require('express');
 const router  = express.Router();
-var jwt = require('express-jwt');
+const jwt = require('express-jwt');
+const isAuth = require('../middelwares/auth');
+const config = require('../config/config');
 
-const tagCtrl = require('../controllers/tasca.controller');
+const etiquetaCtrl = require('../controllers/etiqueta.controller');
 
-router.get('/', tagCtrl.getAll);
-/*router.get('/id=:id', tagCtrl.getTag);
-router.post('/', tagCtrl.createTag);
-router.put('/id=:id', tagCtrl.updateTag);*/
+router.get('/', jwt({secret: config.SECRET_TOKEN}), isAuth, etiquetaCtrl.getAll);
+router.get('/:idEtiqueta', jwt({secret: config.SECRET_TOKEN}), isAuth, etiquetaCtrl.unaEtiqueta);
+
+router.post('/', jwt({secret: config.SECRET_TOKEN}), isAuth, etiquetaCtrl.novaEtiqueta);
+router.put('/:idEtiqueta', jwt({secret: config.SECRET_TOKEN}), isAuth, etiquetaCtrl.actualitzarEtiqueta);
+router.delete('/:idEtiqueta', jwt({secret: config.SECRET_TOKEN}), isAuth, etiquetaCtrl.esborrarEtiqueta);
 
 module.exports = router;

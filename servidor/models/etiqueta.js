@@ -12,6 +12,6 @@ const etiquetaSchema = Schema ({
         type: Schema.Types.ObjectId, ref: 'Tasca'
     }]
 });
-tagSchema.plugin(uniqueValidator);
+etiquetaSchema.plugin(uniqueValidator);
 
 module.exports = mongoose.model('Etiqueta', etiquetaSchema);

@@ -16,7 +16,7 @@ tascaCtrl.getAll = (req, res) => {
 tascaCtrl.unaTasca = (req, res) => {
     const idTasca = req.params.idTasca;
 
-    Tasca.find({usuari: req.user.sub, acabada: false, _id: idTasca}, (err, tasca) => {
+    Tasca.findOne({usuari: req.user.sub, acabada: false, _id: idTasca}, (err, tasca) => {
         if(err) return res.status(500).send({message: `Hi ha hagut un problema al fer la petició: ${err}`}) 
         else if(!tasca) return req.status(404).send({message: `La Tasca no existeix`}) 
 
@@ -42,7 +42,7 @@ tascaCtrl.novaTasca = (req, res) => {
     });
 }
 
-/** Sobreescriure la tasca */
+/** Actualitza la tasca */
 tascaCtrl.sobreEscriureTasca = (req, res) => {
     const idTasca = req.params.idTasca
     const novaTasca = req.body
