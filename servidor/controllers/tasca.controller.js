@@ -5,7 +5,7 @@ const tascaCtrl = {};
 /** Retornar totes les tasques */
 tascaCtrl.getAll = (req, res) => {
 
-    Tasca.find({usuari: req.user.sub, acabada: false}, (err, tasques) => {
+    Tasca.find({usuari: req.user.sub, acabada: false}).populate('etiquetes').exec((err, tasques) => {
         if(err) return res.status(404).send({message: `No s'ha trobat l'ususari: ${err}`})
 
         res.status(200).send(tasques);
@@ -16,7 +16,7 @@ tascaCtrl.getAll = (req, res) => {
 tascaCtrl.unaTasca = (req, res) => {
     const idTasca = req.params.idTasca;
 
-    Tasca.findOne({usuari: req.user.sub, acabada: false, _id: idTasca}, (err, tasca) => {
+    Tasca.findOne({usuari: req.user.sub, acabada: false, _id: idTasca}).populate('etiquetes').exec((err, tasca) => {
         if(err) return res.status(500).send({message: `Hi ha hagut un problema al fer la petició: ${err}`}) 
         else if(!tasca) return req.status(404).send({message: `La Tasca no existeix`}) 
 
@@ -43,7 +43,7 @@ tascaCtrl.novaTasca = (req, res) => {
 }
 
 /** Actualitza la tasca */
-tascaCtrl.sobreEscriureTasca = (req, res) => {
+tascaCtrl.actualitzarTasca = (req, res) => {
     const idTasca = req.params.idTasca
     const novaTasca = req.body
 
