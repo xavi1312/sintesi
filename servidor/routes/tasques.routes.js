@@ -8,6 +8,7 @@ const tascaCtrl = require('../controllers/tasca.controller');
 
 router.get('/', jwt({secret: config.SECRET_TOKEN}), isAuth, tascaCtrl.getAll);
 router.get('/:idTasca', jwt({secret: config.SECRET_TOKEN}), isAuth, tascaCtrl.unaTasca);
+router.get('/filtre/:data', jwt({secret: config.SECRET_TOKEN}), isAuth, tascaCtrl.tasquesAbansData)
 
 router.post('/', jwt({secret: config.SECRET_TOKEN}), isAuth, tascaCtrl.novaTasca);
 router.put('/:idTasca', jwt({secret: config.SECRET_TOKEN}), isAuth, tascaCtrl.actualitzarTasca);

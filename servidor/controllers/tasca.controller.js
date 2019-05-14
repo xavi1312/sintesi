@@ -1,4 +1,5 @@
-const Tasca = require('../models/tasca'); 
+const Tasca = require('../models/tasca');
+const moment = require('moment'); 
 
 const tascaCtrl = {};
 
@@ -63,6 +64,24 @@ tascaCtrl.esborrarTasca = async (req, res) => {
         res.status(200).send({message: "S'ha eliminat correctament"});
     })
 
+}
+
+/** Retornar les tasques abans d'una data */
+tascaCtrl.tasquesAbansData = (req, res) => {
+    const data = new Date();
+    switch(req.body.data){
+        case 'avui'   : data=moment().unix() ;break;
+        case 'setmana': data=moment().add(7, 'days').unix() ;break;
+        default: data=req.body.data ;break; 
+    }
+
+    if(!data) return res.status(400).send({message: 'Valor enviat incorrecte'})
+
+    Tasca.find({usuari: req.user.sub, acabada: false}).where('alarma').lt(data).populate('etiquetes').exec((err, tasques) => {
+        if(err) return res.status(404).send({message: `No s'ha trobat l'ususari: ${err}`})
+
+        res.status(200).send(tasques);
+    });
 }
 
 module.exports = tascaCtrl;
