@@ -1,3 +1,28 @@
-<p>
-  registre works!
-</p>
+<main class="container">
+  <div class="example-container row">
+    <div class="col-12 col-md-6">
+      <mat-form-field class="w-100">
+        <input matInput placeholder="Enter your email" [formControl]="email" required>
+        <mat-error *ngIf="email.invalid">Error</mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="col-12 col-md-6">
+        <mat-form-field class="w-100">
+          <input matInput placeholder="Enter your password" [type]="hide ? 'text' : 'password'" [formControl]="contrasenya" required>
+          <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
+        </mat-form-field>
+    </div>
+    
+    <div class="col-12 col-md-6">
+        <mat-form-field class="w-100">
+          <input matInput placeholder="Enter your password" [type]="hide ? 'text' : 'password'" [formControl]="contrasenya2" required>
+          <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
+        </mat-form-field>
+    </div>
+
+    <div class="col-12 col-md-6 d-flex align-items-center">
+      <mat-checkbox class="w-100" [formControl]="politica">Accepto la politica de privacitat</mat-checkbox>
+    </div>
+  </div>
+</main>
