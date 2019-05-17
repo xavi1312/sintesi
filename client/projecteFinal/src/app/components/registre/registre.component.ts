@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
-
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AuthService } from 'src/app/serveis/auth/auth.service';
 
 @Component({
   selector: 'app-registre',
@@ -9,16 +9,15 @@ import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms'
 })
 export class RegistreComponent implements OnInit {
   fomRegistre: FormGroup;
-  enviat: Boolean = false;
 
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(private formBuilder: FormBuilder, private authService: AuthService ) { }
 
   ngOnInit() {
     this.fomRegistre = this.formBuilder.group({
-      'email': ['', Validators.required, Validators.email],
-      'contrasenya': ['', Validators.required, Validators.minLength(5)],
-      'contrasenya2': ['', Validators.required, Validators.minLength(5)],
-      'politica': ['', Validators.required],
+      email: ['', Validators.compose([Validators.required, Validators.email])],
+      contrasenya: ['', Validators.compose([Validators.required, Validators.minLength(5)])],
+      contrasenya2: ['', Validators.compose([Validators.required, Validators.minLength(5)])],
+      politica: ['', Validators.required],
     },
     {
       validator: this.comparePass
@@ -32,13 +31,23 @@ export class RegistreComponent implements OnInit {
   }
 
   enviar() {
-    this.enviat = true;
 
-    if (this.fomRegistre.invalid) {
-      alert('ha fallat')
-      return;
+    if (this.fomRegistre.invalid) {return}
+
+    const form = {
+      email : this.fomRegistre.controls['email'].value,
+      contrasenya: this.fomRegistre.controls['contrasenya'].value,
     }
+    
+    this.registre(form);
+  }
 
-    alert("tot okay")
+  registre(form):void {
+    this.authService.registre(form).subscribe(
+    res => {
+      this.authService.nouToken(res);
+    }
+      
+    )
   }
 }

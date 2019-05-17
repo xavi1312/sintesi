@@ -1,9 +1,33 @@
 import { Injectable } from '@angular/core';
+import { Observable, of } from 'rxjs';
+import { Usuari } from '../../classes/usuari/usuari';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
+
 export class AuthService {
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
+
+  private url = 'http://localhost:3000/api/auth/';
+
+  public registre(dadesForm): Observable<any> {
+    return this.http.post(this.url+"register", dadesForm);
+  }
+  public iniciSessio(dadesForm): Observable<any> {
+    return this.http.post(this.url+"login", dadesForm);
+  }
+  public logout() {
+    localStorage.removeItem('usuariActual');
+  }
+
+  public nouToken(token) {
+    localStorage.setItem('usuariActual', JSON.stringify(token))
+  }
+
+  public getToken(): String {
+    return JSON.parse(localStorage.getItem('usuariActual')).token;
+  }
 }

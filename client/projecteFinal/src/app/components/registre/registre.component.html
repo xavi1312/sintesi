@@ -9,15 +9,15 @@
 
     <div class="col-12 col-md-6">
         <mat-form-field class="w-100">
-          <input matInput placeholder="Enter your password" [type]="hide ? 'text' : 'password'" formControlName="contrasenya" required>
-          <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
+          <input matInput placeholder="Enter your password" [type]="hidePass ? 'text' : 'password'" formControlName="contrasenya" required>
+          <mat-icon matSuffix (click)="hidePass = !hidePass">{{hidePass ? 'visibility' : 'visibility_off'}}</mat-icon>
         </mat-form-field>
     </div>
     
     <div class="col-12 col-md-6">
         <mat-form-field class="w-100">
-          <input matInput placeholder="Enter your password" [type]="hide ? 'text' : 'password'" formControlName="contrasenya2" required>
-          <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
+          <input matInput placeholder="Enter your password" [type]="hidePass2 ? 'text' : 'password'" formControlName="contrasenya2" required>
+          <mat-icon matSuffix (click)="hidePass2 = !hidePass2">{{hidePass2 ? 'visibility' : 'visibility_off'}}</mat-icon>
         </mat-form-field>
     </div>
 
@@ -25,6 +25,11 @@
       <mat-checkbox class="w-100" formControlName="politica" required>Accepto la politica de privacitat</mat-checkbox>
     </div>
 
+    <div class="col-12 col-md-6">
+      <a routerLink="">
+        <button mat-stroked-button>Cancelar</button>
+      </a>
+    </div>
     <div class="col-12 col-md-6">
       <button  mat-raised-button color="primary" (click)="enviar()">Enviar</button>
     </div>

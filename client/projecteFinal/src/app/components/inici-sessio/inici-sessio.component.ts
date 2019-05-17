@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { AuthService } from 'src/app/serveis/auth/auth.service';
+
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-inici-sessio',
@@ -6,10 +10,36 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./inici-sessio.component.scss']
 })
 export class IniciSessioComponent implements OnInit {
+  fomIniciSessio: FormGroup;
 
-  constructor() { }
+  constructor(private formBuilder: FormBuilder, private authService: AuthService, private router: Router) { }
 
   ngOnInit() {
+    this.fomIniciSessio = this.formBuilder.group({
+      email: ['', Validators.compose([Validators.required, Validators.email])],
+      contrasenya: ['', Validators.compose([Validators.required, Validators.minLength(5)])],
+    })
   }
 
+  enviar() {
+
+    if (this.fomIniciSessio.invalid) {return}
+
+    const form = {
+      email : this.fomIniciSessio.controls['email'].value,
+      contrasenya: this.fomIniciSessio.controls['contrasenya'].value,
+    }
+
+    this.router.navigateByUrl('');
+    this.iniciSessio(form);
+  }
+
+  iniciSessio(form):void {
+    this.authService.iniciSessio(form).subscribe(
+      res => {
+        this.authService.nouToken(res)
+      }
+    )
+  }
+        
 }

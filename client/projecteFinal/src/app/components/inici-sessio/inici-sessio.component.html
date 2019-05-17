@@ -1,0 +1,27 @@
+<main class="container">
+        <form class="example-container row" [formGroup]="fomIniciSessio">
+          <div class="col-12 col-md-6">
+            <mat-form-field class="w-100">
+              <input matInput placeholder="Enter your email" formControlName="email" required>
+              <mat-error *ngIf="">Error</mat-error>
+            </mat-form-field>
+          </div>
+      
+          <div class="col-12 col-md-6">
+              <mat-form-field class="w-100">
+                <input matInput placeholder="Enter your password" [type]="hidePass ? 'text' : 'password'" formControlName="contrasenya" required>
+                <mat-icon matSuffix (click)="hidePass = !hidePass">{{hidePass ? 'visibility' : 'visibility_off'}}</mat-icon>
+              </mat-form-field>
+          </div>
+      
+          <div class="col-6">
+            <a routerLink="">
+              <button mat-stroked-button>Cancelar</button>
+            </a>
+          </div>
+          <div class="col-6">
+            <button  mat-raised-button color="primary" (click)="enviar()">Enviar</button>
+          </div>
+      
+        </form>
+      </main>

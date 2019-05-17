@@ -12,14 +12,6 @@ export class UsuariService {
 
   private url = '';
 
-  public registre(usuari): Observable<any> {
-    return this.http.post(this.url, usuari);
-  }
-
-  public iniciSessio(usuari): Observable<any> {
-    return this.http.post(this.url, usuari);
-  }
-
   public getUsuari(): Observable<Usuari> {
     return this.http.get<Usuari>(this.url);
   }
