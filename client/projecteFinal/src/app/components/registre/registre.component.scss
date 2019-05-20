@@ -1,0 +1,24 @@
+.container {
+    height: 100vh;
+}
+.caixa {
+    background-color: #FFFFFF;
+    border-radius: 1em;
+    box-shadow: 3px 4px rgba(0, 0, 0, 0.425);
+    max-width: 430px;
+}
+.inputGroup, .titol {
+    padding-top: 1em;
+    padding-bottom: 1em;
+}
+.titol {
+    font-weight: bold;
+}
+.registreContainer {
+    color: gray;
+    font-weight: 400;
+    a {
+        text-decoration: none;
+        color: rgba(0, 0, 0, 0.815);
+    }
+}

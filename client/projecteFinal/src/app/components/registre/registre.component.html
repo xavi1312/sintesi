@@ -1,46 +1,47 @@
 <main class="container">
-  <form class="example-container row" [formGroup]="fomRegistre">
-    <div class="col-12 col-md-6">
-      <mat-form-field class="w-100">
-        <input matInput placeholder="Enter your email" formControlName="email" required>
-        <mat-error *ngIf="fomRegistre.controls['email'].hasError('required')">
-          Email <strong>necessari</strong>
-        </mat-error>
-      </mat-form-field>
-    </div>
+    <div class="row justify-content-center align-content-center">
+      <div class="caixa col-11 col-md-6">
+        <form class="row align-content-center justify-content-center p-3 h-100" [formGroup]="fomRegistre">
+          <h3 class="titol h2">Registre</h3>
+  
+          <div class="col-12 inputGroup">
+              <mat-form-field class="w-100">
+                <input matInput placeholder="Enter your email" formControlName="email" required>
+                <mat-error *ngIf="fomRegistre.controls['email'].hasError('required')">
+                  Email <strong>necessari</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+        
+            <div class="col-12 inputGroup">
+                <mat-form-field class="w-100">
+                  <input matInput placeholder="Enter your password" [type]="hidePass ? 'text' : 'password'" formControlName="contrasenya" required>
+                  <mat-icon matSuffix (click)="hidePass = !hidePass">{{hidePass ? 'visibility' : 'visibility_off'}}</mat-icon>
+                  <mat-error *ngIf="fomRegistre.controls['contrasenya'].hasError('required')">
+                    Contraseya <strong>necessaria</strong>
+                  </mat-error>
+                </mat-form-field>
+            </div>
+            
+            <div class="col-12 inputGroup">
+                <mat-form-field class="w-100">
+                  <input matInput placeholder="Enter your password" [type]="hidePass2 ? 'text' : 'password'" formControlName="contrasenya2" required>
+                  <mat-icon matSuffix (click)="hidePass2 = !hidePass2">{{hidePass2 ? 'visibility' : 'visibility_off'}}</mat-icon>
+                  <mat-error *ngIf="fomRegistre.controls['contrasenya2'].hasError('required')">
+                    Verificació contrasenya <strong>necessaria</strong>
+                  </mat-error>
+                </mat-form-field>
+            </div>
+        
+            <div class="col-12 inputGroup d-flex align-items-center justify-content-center">
+              <mat-checkbox class="w-100" formControlName="politica" required>Accepto la politica de privacitat</mat-checkbox>
+            </div>
 
-    <div class="col-12 col-md-6">
-        <mat-form-field class="w-100">
-          <input matInput placeholder="Enter your password" [type]="hidePass ? 'text' : 'password'" formControlName="contrasenya" required>
-          <mat-icon matSuffix (click)="hidePass = !hidePass">{{hidePass ? 'visibility' : 'visibility_off'}}</mat-icon>
-          <mat-error *ngIf="fomRegistre.controls['contrasenya'].hasError('required')">
-            Contraseya <strong>necessaria</strong>
-          </mat-error>
-        </mat-form-field>
+            <button mat-raised-button color="primary" class="col-10 mt-2 mb-4">Enviar</button>
+            <section class="registreContainer">
+              <span>No tens compte? </span><a [routerLink]="[ '/inici-sessio']">Iniciar sessió</a>
+            </section>
+        </form>
+      </div>
     </div>
-    
-    <div class="col-12 col-md-6">
-        <mat-form-field class="w-100">
-          <input matInput placeholder="Enter your password" [type]="hidePass2 ? 'text' : 'password'" formControlName="contrasenya2" required>
-          <mat-icon matSuffix (click)="hidePass2 = !hidePass2">{{hidePass2 ? 'visibility' : 'visibility_off'}}</mat-icon>
-          <mat-error *ngIf="fomRegistre.controls['contrasenya2'].hasError('required')">
-            Verificació contrasenya <strong>necessaria</strong>
-          </mat-error>
-        </mat-form-field>
-    </div>
-
-    <div class="col-12 col-md-6 d-flex align-items-center">
-      <mat-checkbox class="w-100" formControlName="politica" required>Accepto la politica de privacitat</mat-checkbox>
-    </div>
-
-    <div class="col-12 col-md-6">
-      <a routerLink="">
-        <button mat-stroked-button>Cancelar</button>
-      </a>
-    </div>
-    <div class="col-12 col-md-6">
-      <button  mat-raised-button color="primary" (click)="enviar()">Enviar</button>
-    </div>
-
-  </form>
-</main>
+  </main>
