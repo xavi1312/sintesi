@@ -26,8 +26,19 @@ export class AuthService {
   public nouToken(token) {
     localStorage.setItem('usuariActual', JSON.stringify(token))
   }
-
   public getToken(): String {
-    return JSON.parse(localStorage.getItem('usuariActual')).token;
+    try {
+      return JSON.parse(localStorage.getItem('usuariActual')).token;
+    }
+    catch(err) {
+      return null;
+    }
+  }
+  public isAuth(): Boolean {
+    let isAuth = false;
+    
+    if(this.getToken() || this.getToken() != null) isAuth = true;
+
+    return isAuth;
   }
 }

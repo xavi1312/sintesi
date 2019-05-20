@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/serveis/auth/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-registre',
@@ -10,7 +11,7 @@ import { AuthService } from 'src/app/serveis/auth/auth.service';
 export class RegistreComponent implements OnInit {
   fomRegistre: FormGroup;
 
-  constructor(private formBuilder: FormBuilder, private authService: AuthService ) { }
+  constructor(private formBuilder: FormBuilder, private authService: AuthService, private router: Router) { }
 
   ngOnInit() {
     this.fomRegistre = this.formBuilder.group({
@@ -46,6 +47,7 @@ export class RegistreComponent implements OnInit {
     this.authService.registre(form).subscribe(
     res => {
       this.authService.nouToken(res);
+      this.router.navigateByUrl('home');
     }
       
     )

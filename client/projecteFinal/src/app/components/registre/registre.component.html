@@ -3,7 +3,9 @@
     <div class="col-12 col-md-6">
       <mat-form-field class="w-100">
         <input matInput placeholder="Enter your email" formControlName="email" required>
-        <mat-error *ngIf="">Error</mat-error>
+        <mat-error *ngIf="fomRegistre.controls['email'].hasError('required')">
+          Email <strong>necessari</strong>
+        </mat-error>
       </mat-form-field>
     </div>
 
@@ -11,6 +13,9 @@
         <mat-form-field class="w-100">
           <input matInput placeholder="Enter your password" [type]="hidePass ? 'text' : 'password'" formControlName="contrasenya" required>
           <mat-icon matSuffix (click)="hidePass = !hidePass">{{hidePass ? 'visibility' : 'visibility_off'}}</mat-icon>
+          <mat-error *ngIf="fomRegistre.controls['contrasenya'].hasError('required')">
+            Contraseya <strong>necessaria</strong>
+          </mat-error>
         </mat-form-field>
     </div>
     
@@ -18,6 +23,9 @@
         <mat-form-field class="w-100">
           <input matInput placeholder="Enter your password" [type]="hidePass2 ? 'text' : 'password'" formControlName="contrasenya2" required>
           <mat-icon matSuffix (click)="hidePass2 = !hidePass2">{{hidePass2 ? 'visibility' : 'visibility_off'}}</mat-icon>
+          <mat-error *ngIf="fomRegistre.controls['contrasenya2'].hasError('required')">
+            Verificació contrasenya <strong>necessaria</strong>
+          </mat-error>
         </mat-form-field>
     </div>
 

@@ -42,13 +42,15 @@ import {MatSortModule} from '@angular/material/sort';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import { AuditInterceptorService } from './serveis/interceptors/audit-interceptor.service';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { HomeComponent } from './components/home/home/home.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     BenvingudaComponent,
     IniciSessioComponent,
-    RegistreComponent
+    RegistreComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,

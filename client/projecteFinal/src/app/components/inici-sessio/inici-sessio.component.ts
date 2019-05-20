@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/serveis/auth/auth.service';
 
 import {Router} from '@angular/router';
@@ -27,17 +27,17 @@ export class IniciSessioComponent implements OnInit {
 
     const form = {
       email : this.fomIniciSessio.controls['email'].value,
-      contrasenya: this.fomIniciSessio.controls['contrasenya'].value,
+      contrasenya: this.fomIniciSessio.controls['contrasenya'].value
     }
 
-    this.router.navigateByUrl('');
     this.iniciSessio(form);
   }
-
+  
   iniciSessio(form):void {
     this.authService.iniciSessio(form).subscribe(
       res => {
         this.authService.nouToken(res)
+        this.router.navigateByUrl('home');
       }
     )
   }
