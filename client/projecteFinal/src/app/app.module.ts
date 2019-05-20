@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import { BenvingudaComponent } from './components/benvinguda/benvinguda.component';
 import { IniciSessioComponent } from './components/inici-sessio/inici-sessio.component';
 import { RegistreComponent } from './components/registre/registre.component';
+import { Globals } from './variablesGlobals';
 
 //Angular Material Components
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
@@ -40,7 +41,6 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatTableModule} from '@angular/material/table';
 import {MatSortModule} from '@angular/material/sort';
 import {MatPaginatorModule} from '@angular/material/paginator';
-import { AuditInterceptorService } from './serveis/interceptors/audit-interceptor.service';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { HomeComponent } from './components/home/home.component';
 import { SidenavComponent } from './components/header/sidenav/sidenav.component';
@@ -97,7 +97,7 @@ import { TascaComponent } from './components/tasca/tasca.component';
     MatSortModule,
     MatPaginatorModule
   ],
-  providers: [ ],
+  providers: [ Globals ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
-import { Usuari } from '../../classes/usuari/usuari';
+import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
+import { Globals } from 'src/app/variablesGlobals';
 
 @Injectable({
   providedIn: 'root'
@@ -9,9 +9,9 @@ import { HttpClient } from '@angular/common/http';
 
 export class AuthService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private globals: Globals) { }
 
-  private url = 'http://localhost:3000/api/auth/';
+  private url = `${this.globals.rutaApi}/auth`;
 
   public registre(dadesForm): Observable<any> {
     return this.http.post(this.url+"register", dadesForm);
