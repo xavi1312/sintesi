@@ -1,0 +1,16 @@
+<mat-sidenav-container class="example-container">
+  <mat-sidenav #sidenav [mode]="over">
+    <p><button mat-button (click)="sidenav.toggle()">Tancar</button></p>
+    <mat-nav-list>
+      <a mat-list-item routerLink="">Totes les tasques</a>
+      <a mat-list-item routerLink="">Avui</a>
+      <a mat-list-item routerLink="">Aquesta setmana</a>
+      <a mat-list-item routerLink="">Etiquetes</a>
+    </mat-nav-list>
+  </mat-sidenav>
+  
+  <mat-sidenav-content>
+    <app-nav></app-nav>
+    <p><button mat-button (click)="sidenav.toggle()">Obrir</button></p>
+  </mat-sidenav-content>
+</mat-sidenav-container>

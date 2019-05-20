@@ -42,7 +42,10 @@ import {MatSortModule} from '@angular/material/sort';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import { AuditInterceptorService } from './serveis/interceptors/audit-interceptor.service';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
-import { HomeComponent } from './components/home/home/home.component';
+import { HomeComponent } from './components/home/home.component';
+import { SidenavComponent } from './components/header/sidenav/sidenav.component';
+import { NavComponent } from './components/header/nav/nav.component';
+import { TascaComponent } from './components/tasca/tasca.component';
 
 @NgModule({
   declarations: [
@@ -50,7 +53,10 @@ import { HomeComponent } from './components/home/home/home.component';
     BenvingudaComponent,
     IniciSessioComponent,
     RegistreComponent,
-    HomeComponent
+    HomeComponent,
+    SidenavComponent,
+    NavComponent,
+    TascaComponent
   ],
   imports: [
     BrowserModule,

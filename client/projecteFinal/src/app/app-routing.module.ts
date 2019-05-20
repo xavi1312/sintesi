@@ -3,9 +3,10 @@ import { Routes, RouterModule } from '@angular/router';
 import { BenvingudaComponent } from './components/benvinguda/benvinguda.component';
 import { RegistreComponent } from './components/registre/registre.component';
 import { IniciSessioComponent } from './components/inici-sessio/inici-sessio.component';
-import { HomeComponent } from './components/home/home/home.component';
+import { HomeComponent } from './components/home/home.component';
 import { CanActivate } from '@angular/router/src/utils/preactivation';
 import { AuthGuardService as isAuth} from '../app/serveis/auth/auth-guard.service';
+import { SidenavComponent } from './components/header/sidenav/sidenav.component';
 
 const routes: Routes = [
   {
@@ -23,6 +24,11 @@ const routes: Routes = [
   {
     path: 'home',
     component: HomeComponent,
+    canActivate: [isAuth]
+  },
+  {
+    path: 'sidenav',
+    component: SidenavComponent,
     canActivate: [isAuth]
   }
 ];
