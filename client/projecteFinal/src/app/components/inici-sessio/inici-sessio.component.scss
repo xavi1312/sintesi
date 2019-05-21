@@ -1,29 +1,14 @@
-.container {
+
+.container, .container-fluid {
     height: 100vh;
     .row {
-        height: 80%;
+        height: 100%;
     }
 }
-.caixa {
-    background-color: #FFFFFF;
-    border-radius: 1em;
-    box-shadow: 3px 4px rgba(0, 0, 0, 0.425);
-    height: 70vh;
-    max-height: 500px;
-    max-width: 370px;
+form {
+    max-width: 300px;
 }
-.inputGroup, .titol {
-    padding-top: 1em;
-    padding-bottom: 1em;
-}
-.titol {
-    font-weight: bold;
-}
-.registreContainer {
-    color: gray;
-    font-weight: 400;
-    a {
-        text-decoration: none;
-        color: rgba(0, 0, 0, 0.815);
-    }
+button {
+    font-size: 1.3rem;
+    line-height: 3;
 }

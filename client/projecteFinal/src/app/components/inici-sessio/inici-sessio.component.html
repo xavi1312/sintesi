@@ -1,32 +1,39 @@
-<main class="container">
-  <div class="row justify-content-center align-content-center">
-    <div class="caixa col-10 col-md-6">
-      <form class="row align-content-center justify-content-center p-3 h-100" [formGroup]="fomIniciSessio">
-        <h3 class="titol h2">Inici Sessió</h3>
+<main class="container-fluid">
+  <div class="row">
+    <section class="col-3 bg-dark">
 
-        <div class="col-12 inputGroup">
-            <mat-form-field class="w-100">
+    </section>
+    <article class="col-9">
+      <div class="row justify-content-center">
+        <div class="col-6 h-75 d-flex flex-wrap align-items-center justify-content-center">
+          <form class="w-100" [formGroup]="fomIniciSessio">
+  
+            <mat-form-field class="w-100 p-2">
               <input matInput placeholder="Enter your email" formControlName="email" required>
               <mat-error *ngIf="fomIniciSessio.controls['email'].hasError('required')">
                 Email <strong>necessari</strong>
               </mat-error>
             </mat-form-field>
-          </div>
-      
-          <div class="col-12 inputGroup">
-            <mat-form-field class="w-100">
+  
+            <mat-form-field class="w-100 p-2">
               <input matInput placeholder="Enter your password" [type]="hidePass ? 'text' : 'password'" formControlName="contrasenya" required>
               <mat-icon matSuffix (click)="hidePass = !hidePass">{{hidePass ? 'visibility' : 'visibility_off'}}</mat-icon>
               <mat-error *ngIf="fomIniciSessio.controls['contrasenya'].hasError('required')">
                 Contraseya <strong>necessaria</strong>
               </mat-error>
             </mat-form-field>
-          </div>
-          <button mat-raised-button color="primary" class="col-10 mt-2 mb-4">Enviar</button>
-          <section class="registreContainer">
-            <span>No tens compte? </span><a [routerLink]="[ '/registre']">Registrar-se</a>
-          </section>
-      </form>
-    </div>
+  
+            <button mat-raised-button color="primary" class="w-100 mt-2" (click)="enviar()">
+              Login
+              <mat-icon class="pl-2">arrow_right_alt</mat-icon>
+            </button>
+  
+          </form>
+        </div>
+        <section class="col-12 h-25">
+
+        </section>
+      </div>
+    </article>
   </div>
 </main>

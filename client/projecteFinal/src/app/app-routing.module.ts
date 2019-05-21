@@ -4,9 +4,8 @@ import { BenvingudaComponent } from './components/benvinguda/benvinguda.componen
 import { RegistreComponent } from './components/registre/registre.component';
 import { IniciSessioComponent } from './components/inici-sessio/inici-sessio.component';
 import { HomeComponent } from './components/home/home.component';
-import { CanActivate } from '@angular/router/src/utils/preactivation';
 import { AuthGuardService as isAuth} from '../app/serveis/auth/auth-guard.service';
-import { SidenavComponent } from './components/header/sidenav/sidenav.component';
+import { EtiquetesComponent } from './components/etiquetes/etiquetes.component';
 
 const routes: Routes = [
   {
@@ -27,8 +26,8 @@ const routes: Routes = [
     canActivate: [isAuth]
   },
   {
-    path: 'sidenav',
-    component: SidenavComponent,
+    path: 'home/etiquetes',
+    component: EtiquetesComponent,
     canActivate: [isAuth]
   }
 ];

@@ -1,16 +1,26 @@
-<mat-sidenav-container class="example-container">
-  <mat-sidenav #sidenav [mode]="over">
+<mat-sidenav-container class="example-container" autosize>
+  <mat-sidenav #sidenav mode="side" class="sideNav" role="navigation">
     <p><button mat-button (click)="sidenav.toggle()">Tancar</button></p>
     <mat-nav-list>
       <a mat-list-item routerLink="">Totes les tasques</a>
       <a mat-list-item routerLink="">Avui</a>
       <a mat-list-item routerLink="">Aquesta setmana</a>
-      <a mat-list-item routerLink="">Etiquetes</a>
+      <a mat-list-item routerLink="etiquetes">
+        <mat-icon class="mr-2">label</mat-icon>
+        Etiquetes
+      </a>
     </mat-nav-list>
   </mat-sidenav>
   
-  <mat-sidenav-content>
-    <app-nav></app-nav>
-    <p><button mat-button (click)="sidenav.toggle()">Obrir</button></p>
+  <mat-sidenav-content role="main">
+    
+    <mat-toolbar color="primary" class="back">
+        <mat-toolbar-row>
+          <mat-icon (click)="sidenav.toggle()">view_headline</mat-icon>
+          <span class="example-spacer"></span>
+          <mat-icon class="example-icon" aria-hidden="false" aria-label="Example user verified icon">verified_user</mat-icon>
+        </mat-toolbar-row>
+      </mat-toolbar>
+      <p>home</p>
   </mat-sidenav-content>
 </mat-sidenav-container>

@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -46,6 +46,8 @@ import { HomeComponent } from './components/home/home.component';
 import { SidenavComponent } from './components/header/sidenav/sidenav.component';
 import { NavComponent } from './components/header/nav/nav.component';
 import { TascaComponent } from './components/tasca/tasca.component';
+import { EtiquetesComponent, DialogOverviewExampleDialog } from './components/etiquetes/etiquetes.component';
+import { EtiquetaComponent } from './components/etiqueta/etiqueta.component';
 
 @NgModule({
   declarations: [
@@ -56,13 +58,17 @@ import { TascaComponent } from './components/tasca/tasca.component';
     HomeComponent,
     SidenavComponent,
     NavComponent,
-    TascaComponent
+    TascaComponent,
+    EtiquetesComponent,
+    EtiquetaComponent,
+    DialogOverviewExampleDialog,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
     HttpClientModule,
+    FormsModule,
 
     BrowserAnimationsModule,
     MatCheckboxModule,
@@ -98,6 +104,7 @@ import { TascaComponent } from './components/tasca/tasca.component';
     MatPaginatorModule
   ],
   providers: [ Globals ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [EtiquetesComponent, DialogOverviewExampleDialog],
 })
 export class AppModule { }

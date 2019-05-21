@@ -1,0 +1,42 @@
+<main>
+  <mat-sidenav-container class="example-container" autosize>
+      <mat-sidenav #sidenav mode="side" class="sideNav" role="navigation">
+        <p><button mat-button (click)="sidenav.toggle()">Tancar</button></p>
+        <mat-nav-list>
+          <a mat-list-item routerLink="">Totes les tasques</a>
+          <a mat-list-item routerLink="">Avui</a>
+          <a mat-list-item routerLink="">Aquesta setmana</a>
+          <a mat-list-item routerLink="etiquetes">
+            <mat-icon class="mr-2">label</mat-icon>
+            Etiquetes
+          </a>
+        </mat-nav-list>
+      </mat-sidenav>
+      
+      <mat-sidenav-content role="main">
+        
+        <mat-toolbar color="primary" class="back">
+          <mat-toolbar-row>
+            <mat-icon (click)="sidenav.toggle()">view_headline</mat-icon>
+            <span class="example-spacer"></span>
+            <mat-icon class="example-icon" aria-hidden="false" aria-label="Example user verified icon">verified_user</mat-icon>
+          </mat-toolbar-row>
+        </mat-toolbar>
+          
+        <ol>
+          <li>
+            <mat-form-field>
+              <input matInput [(ngModel)]="name" placeholder="What's your name?">
+            </mat-form-field>
+          </li>
+          <li>
+            <button mat-raised-button (click)="openDialog()">Pick one</button>
+          </li>
+          <li *ngIf="animal">
+            You chose: <i>{{name}}</i>
+          </li>
+        </ol>
+
+      </mat-sidenav-content>
+    </mat-sidenav-container>
+</main>
