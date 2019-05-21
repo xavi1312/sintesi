@@ -16,3 +16,29 @@
 .example-spacer {
     flex: 1 1 auto;
 }
+
+/* Component */
+.container-fluid {
+    padding-left: 2em;
+    padding-right: 2em;
+}
+.divider {
+    border-top-width: 2px;
+}
+.titolContainer {
+    height: 80px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* Boto més */
+.botoMesContainer {
+    position: absolute;
+    bottom: 3em;
+    right: 3em;
+}
+.botoMes {
+    transform: rotateZ(45deg);
+}

@@ -14,10 +14,10 @@ export class AuthService {
   private url = `${this.globals.rutaApi}/auth`;
 
   public registre(dadesForm): Observable<any> {
-    return this.http.post(this.url+"register", dadesForm);
+    return this.http.post(this.url+"/register", dadesForm);
   }
   public iniciSessio(dadesForm): Observable<any> {
-    return this.http.post(this.url+"login", dadesForm);
+    return this.http.post(this.url+"/login", dadesForm);
   }
   public logout() {
     localStorage.removeItem('usuariActual');

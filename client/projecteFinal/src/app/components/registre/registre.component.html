@@ -37,7 +37,7 @@
               <mat-checkbox class="w-100" formControlName="politica" required>Accepto la politica de privacitat</mat-checkbox>
             </div>
 
-            <button mat-raised-button color="primary" class="col-10 mt-2 mb-4">Enviar</button>
+            <button mat-raised-button color="primary" class="col-10 mt-2 mb-4" (click)="enviar()">Enviar</button>
             <section class="registreContainer">
               <span>No tens compte? </span><a [routerLink]="[ '/inici-sessio']">Iniciar sessió</a>
             </section>

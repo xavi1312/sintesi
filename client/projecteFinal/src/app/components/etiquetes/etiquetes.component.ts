@@ -1,10 +1,7 @@
-import {Component, OnInit ,Inject} from '@angular/core';
-import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
-
-export interface DialogData {
-  animal: string;
-  name: string;
-}
+import { Component, OnInit, ChangeDetectorRef, ViewChild } from '@angular/core';
+import { MediaMatcher } from '@angular/cdk/layout';
+import { EtiquetaService } from 'src/app/serveis/etiqueta/etiqueta.service';
+import { Etiqueta } from 'src/app/classes/etiqueta/etiqueta';
 
 @Component({
   selector: 'app-etiquetes',
@@ -12,43 +9,48 @@ export interface DialogData {
   styleUrls: ['./etiquetes.component.scss']
 })
 export class EtiquetesComponent implements OnInit {
-
-  animal: string;
-  name: string;
-
-  constructor(public dialog: MatDialog) {}
-
-  openDialog(): void {
-    const dialogRef = this.dialog.open(DialogOverviewExampleDialog, {
-      width: '250px',
-      data: {name: this.name, animal: this.animal}
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      this.animal = result;
-    });
+  
+  constructor(changeDetectorRef: ChangeDetectorRef, media: MediaMatcher, private etiquetaService: EtiquetaService) {
+    this.mobileQuery = media.matchMedia('(max-width: 600px)');
+    this._mobileQueryListener = () => changeDetectorRef.detectChanges();
+    this.mobileQuery.addListener(this._mobileQueryListener);
+  }
+  
+  ngOnInit() { 
+    if(!this.mobileQuery.matches){ this.sidenav.open(); }
   }
 
-  ngOnInit() {
+  @ViewChild('sidenav') sidenav;
+  mobileQuery: MediaQueryList;
+  private _mobileQueryListener: () => void;
+  private etiquetes: Etiqueta[] = [{id: 1, nom: 'Mates'}, {id: 2, nom: 'Castellà'}];
+
+  novaEtiqueta(etiqueta: Etiqueta) {
+    this.etiquetaService.novaEtiqueta(etiqueta).subscribe(
+      res => {
+        this.etiquetes = res;
+      }
+    )
   }
-
-}
-
-@Component({
-  selector: 'dialog-overview-example-dialog',
-  templateUrl: 'dialog-overview-example-dialog.html',
-})
-export class DialogOverviewExampleDialog {
-
-  constructor(
-    public dialogRef: MatDialogRef<DialogOverviewExampleDialog>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData) {}
-
-  onNoClick(): void {
-    this.dialogRef.close();
+  esboorarEtiqueta(id: Number) {
+    this.etiquetaService.esborrarEtiqueta(id).subscribe(
+      res => {
+        this.etiquetes = res;
+      }
+    )
   }
-
-
-
+  actualitzarEtiqueta(etiqueta: Etiqueta) {
+    this.etiquetaService.actualitzarEtiqueta(etiqueta).subscribe(
+      res => {
+        this.etiquetes = res;
+      }
+    )
+  }
+  getEtiquetes() {
+    this.etiquetaService.getEtiquetes().subscribe(
+      res => {
+        this.etiquetes = res;
+      }
+    )
+  }
 }

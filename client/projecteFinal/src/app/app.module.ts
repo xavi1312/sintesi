@@ -33,21 +33,17 @@ import {MatExpansionModule} from '@angular/material/expansion';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import {MatChipsModule} from '@angular/material/chips';
 import {MatIconModule} from '@angular/material/icon';
-import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
-import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
-import {MatTableModule} from '@angular/material/table';
 import {MatSortModule} from '@angular/material/sort';
-import {MatPaginatorModule} from '@angular/material/paginator';
-import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { HomeComponent } from './components/home/home.component';
 import { SidenavComponent } from './components/header/sidenav/sidenav.component';
 import { NavComponent } from './components/header/nav/nav.component';
 import { TascaComponent } from './components/tasca/tasca.component';
-import { EtiquetesComponent, DialogOverviewExampleDialog } from './components/etiquetes/etiquetes.component';
-import { EtiquetaComponent } from './components/etiqueta/etiqueta.component';
+import { EtiquetesComponent } from './components/etiquetes/etiquetes.component';
+import { EtiquetaComponent, DialogEditarEtiqueta } from './components/etiqueta/etiqueta.component';
 
 @NgModule({
   declarations: [
@@ -61,7 +57,7 @@ import { EtiquetaComponent } from './components/etiqueta/etiqueta.component';
     TascaComponent,
     EtiquetesComponent,
     EtiquetaComponent,
-    DialogOverviewExampleDialog,
+    DialogEditarEtiqueta
   ],
   imports: [
     BrowserModule,
@@ -94,17 +90,13 @@ import { EtiquetaComponent } from './components/etiqueta/etiqueta.component';
     MatButtonToggleModule,
     MatChipsModule,
     MatIconModule,
-    MatProgressSpinnerModule,
-    MatProgressBarModule,
     MatDialogModule,
     MatTooltipModule,
     MatSnackBarModule,
-    MatTableModule,
-    MatSortModule,
-    MatPaginatorModule
+    MatSortModule
   ],
   providers: [ Globals ],
   bootstrap: [AppComponent],
-  entryComponents: [EtiquetesComponent, DialogOverviewExampleDialog],
+  entryComponents: [EtiquetesComponent, DialogEditarEtiqueta],
 })
 export class AppModule { }
