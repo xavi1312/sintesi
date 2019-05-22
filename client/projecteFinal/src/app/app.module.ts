@@ -7,7 +7,7 @@ import { AppComponent } from './app.component';
 import { BenvingudaComponent } from './components/benvinguda/benvinguda.component';
 import { IniciSessioComponent } from './components/inici-sessio/inici-sessio.component';
 import { RegistreComponent } from './components/registre/registre.component';
-import { Globals } from './variablesGlobals';
+import { Globals, MediaQuerys } from './variablesGlobals';
 
 //Angular Material Components
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
@@ -37,13 +37,14 @@ import {MatDialogModule} from '@angular/material/dialog';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatSortModule} from '@angular/material/sort';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HomeComponent } from './components/home/home.component';
 import { SidenavComponent } from './components/header/sidenav/sidenav.component';
 import { NavComponent } from './components/header/nav/nav.component';
 import { TascaComponent } from './components/tasca/tasca.component';
-import { EtiquetesComponent } from './components/etiquetes/etiquetes.component';
+import { EtiquetesComponent, DialogNovaEtiqueta } from './components/etiquetes/etiquetes.component';
 import { EtiquetaComponent, DialogEditarEtiqueta } from './components/etiqueta/etiqueta.component';
+import { AuditInterceptorService } from './serveis/interceptors/audit-interceptor.service';
 
 @NgModule({
   declarations: [
@@ -57,7 +58,8 @@ import { EtiquetaComponent, DialogEditarEtiqueta } from './components/etiqueta/e
     TascaComponent,
     EtiquetesComponent,
     EtiquetaComponent,
-    DialogEditarEtiqueta
+    DialogEditarEtiqueta,
+    DialogNovaEtiqueta
   ],
   imports: [
     BrowserModule,
@@ -95,8 +97,8 @@ import { EtiquetaComponent, DialogEditarEtiqueta } from './components/etiqueta/e
     MatSnackBarModule,
     MatSortModule
   ],
-  providers: [ Globals ],
+  providers: [ Globals, MediaQuerys ,{provide: HTTP_INTERCEPTORS, useClass: AuditInterceptorService, multi: true}  ],
   bootstrap: [AppComponent],
-  entryComponents: [EtiquetesComponent, DialogEditarEtiqueta],
+  entryComponents: [EtiquetesComponent, DialogEditarEtiqueta, DialogNovaEtiqueta],
 })
 export class AppModule { }

@@ -19,18 +19,18 @@ export class EtiquetaComponent implements OnInit {
   @Output() public eliminar = new EventEmitter<Number>();
 
   editarEtiqueta(novaEtiqueta: Etiqueta): void { this.editar.emit(novaEtiqueta); }
-  eliminarEtiqueta(): void { this.eliminar.emit(this.etiqueta.id) }
+  eliminarEtiqueta(): void { this.eliminar.emit(this.etiqueta._id) }
 
   obrirDialog(): void {
     const dialogRef = this.dialog.open(DialogEditarEtiqueta, {
       width: '250px',
-      data: {name: this.etiqueta.nom}
+      data: {nom: this.etiqueta.nom}
     });
 
     dialogRef.afterClosed().subscribe(res => {
       if(this.etiqueta.nom != res && res != ' ' && res != undefined){
         let novaEtiqueta: Etiqueta = {
-          id: this.etiqueta.id,
+          _id: this.etiqueta._id,
           nom: res
         }
         this.editarEtiqueta(novaEtiqueta);

@@ -1,0 +1,11 @@
+<div mat-dialog-content>
+    <p>Escriu el nom de la etiqueta</p>
+    <mat-form-field class="example-full-width">
+        <input matInput placeholder="Nom" [(ngModel)]="data.nom" required>
+    </mat-form-field>
+</div>
+<div mat-dialog-actions>
+    <button mat-button (click)="onNoClick()">Cancelar</button>
+    <button mat-button mat-primary [mat-dialog-close]="data.nom" cdkFocusInitial>Crear</button>
+</div>
+      

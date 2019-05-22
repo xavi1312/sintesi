@@ -1,2 +1,20 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<router-outlet></router-outlet>
+<mat-sidenav-container class="example-container" autosize>
+    <mat-sidenav #sidenav [mode]="mobileQuery.matches ? 'over' : 'side'" class="sideNav" role="navigation">
+        <app-sidenav></app-sidenav>
+    </mat-sidenav>
+
+    <mat-sidenav-content role="main">
+        
+        <mat-toolbar color="primary" class="back">
+            <mat-toolbar-row>
+                <mat-icon (click)="sidenav.toggle()" *ngIf="mobileQuery.matches">menu</mat-icon>
+                <span class="example-spacer"></span>
+                <mat-icon class="example-icon" aria-hidden="false" aria-label="Example user verified icon">search</mat-icon>
+            </mat-toolbar-row>
+        </mat-toolbar>
+
+        <router-outlet></router-outlet>
+        
+    </mat-sidenav-content>
+</mat-sidenav-container>
+

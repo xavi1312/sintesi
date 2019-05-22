@@ -1,4 +1,4 @@
 export class Etiqueta {
-    id: Number
+    _id?: Number
     nom: String
 }

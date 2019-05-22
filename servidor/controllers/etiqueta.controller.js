@@ -33,34 +33,48 @@ etiquetaCtrl.novaEtiqueta = (req, res) => {
     const etiqueta = new Etiqueta({nom: req.body.nom})
     if(req.body.tasques) etiqueta.tasques = req.body.tasques
 
-    etiqueta.save((err) => {
+    etiqueta.save((err, novaEtiqueta) => {
         if(err) return res.status(500).send({message: `Hi ha hagut un problema al guardar l'etiqueta: ${err}`})
 
-        res.status(200).send({message: `S'ha creat l'etiqueta correctament`})
+        res.status(200).send(novaEtiqueta)
     })
 }
 
 /** Actualitza la etiqueta */
-etiquetaCtrl.actualitzarEtiqueta = (req, res) => {
+etiquetaCtrl.actualitzarEtiqueta = async (req, res) => {
     const novaEtiqueta = req.body
     const idEtiqueta = req.params.idEtiqueta
+    const idUsuari = req.user.sub
 
-    Etiqueta.findByIdAndUpdate(idEtiqueta, novaEtiqueta, (err, etiquetaActualitzada) => {
+    await Etiqueta.findByIdAndUpdate(idEtiqueta, novaEtiqueta, (err) => {
         if(err) return res.status(500).send({message: `S'ha produït un error al actualitzar la etiqueta: ${err}`})
-        
-        res.status(200).send(etiquetaActualitzada)
     })
+
+    Etiqueta.find({}).populate('tasques','nom _id').where('usuari').equals(idUsuari).exec((err, etiquetes) => {
+        if(err) return req.status(500).send({message: `No s'han trobat etiquetes: ${err}`})
+
+        res.status(200).send(etiquetes)
+    });
 }
 
 /** Esborrar una sola etiqueta */
-etiquetaCtrl.esborrarEtiqueta = (req, res) => {
+etiquetaCtrl.esborrarEtiqueta = async (req, res) => {
     const idEtiqueta = req.params.idEtiqueta
+    const idUsuari = req.user.sub
 
-    Etiqueta.findByIdAndRemove(idEtiqueta, (err) => {
+    console.log("ID ETIQUETA: "+idEtiqueta+"\n")
+
+    await Etiqueta.findByIdAndRemove(idEtiqueta, (err) => {
         if(err) return res.status(500).send(`Hi ha hagut un error al eliminar l'etiqueta: ${err}`)
-
-        res.status(200).send({message: `S'ha eliminar l'etiqueta correctament`})
+        console.log("dins")
     })
+    console.log("segueix")
+    
+    Etiqueta.find({}).populate('tasques','nom _id').where('usuari').equals(idUsuari).exec((err, etiquetes) => {
+        if(err) return req.status(500).send({message: `No s'han trobat etiquetes: ${err}`})
+
+        res.status(200).send(etiquetes)
+    });
 }
 
 module.exports = etiquetaCtrl;

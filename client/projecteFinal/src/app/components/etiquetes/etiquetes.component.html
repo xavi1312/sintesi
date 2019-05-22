@@ -1,39 +1,11 @@
-<main>
-  <mat-sidenav-container class="example-container" autosize>
-    <mat-sidenav #sidenav [mode]="mobileQuery.matches ? 'over' : 'side'" class="sideNav" role="navigation">
-      <p><button mat-button (click)="sidenav.toggle()">Tancar</button></p>
-      <mat-nav-list>
-        <a mat-list-item routerLink="/home">Totes les tasques</a>
-        <a mat-list-item routerLink="">Avui</a>
-        <a mat-list-item routerLink="">Aquesta setmana</a>
-        <a mat-list-item routerLink="etiquetes">
-          <mat-icon class="mr-2">label</mat-icon>
-          Etiquetes
-        </a>
-      </mat-nav-list>
-    </mat-sidenav>
-    
-    <mat-sidenav-content role="main">
-      
-      <mat-toolbar color="primary" class="back">
-        <mat-toolbar-row>
-          <mat-icon (click)="sidenav.toggle()">menu</mat-icon>
-          <span class="example-spacer"></span>
-          <mat-icon class="example-icon" aria-hidden="false" aria-label="Example user verified icon">search</mat-icon>
-        </mat-toolbar-row>
-      </mat-toolbar>
-      
-      <div class="container-fluid">
-        <div class="row">
-          <div class="col-12 titolContainer">
-            <h1 class="h3">Etiquetes</h1>
-            <button mat-stroked-button *ngIf="!mobileQuery.matches"><span>Nova Etiqueta</span> </button>
-          </div>
-          <mat-divider class="col-12 mb-3 divider"></mat-divider>
-          <app-etiqueta class="col-12" *ngFor="let etiqueta of etiquetes" [etiquta]="etiqueta" (editar)="actualitzarEtiqueta($event)"></app-etiqueta>
-        </div>
+<div class="container-fluid">
+    <div class="row">
+      <div class="col-12 titolContainer">
+        <h1 class="h3">Etiquetes</h1>
+        <button mat-stroked-button *ngIf="!mobileQuery.matches" (click)="obrirDialog()"><span>Nova Etiqueta</span> </button>
       </div>
-      <button mat-fab class="botoMesContainer" *ngIf="mobileQuery.matches"><mat-icon class="botoMes">close</mat-icon> </button>
-    </mat-sidenav-content>
-  </mat-sidenav-container>
-</main>
+      <mat-divider class="col-12 mb-3 divider"></mat-divider>
+      <app-etiqueta class="col-12" *ngFor="let etiqueta of etiquetes" [etiquta]="etiqueta" (editar)="actualitzarEtiqueta($event)" (eliminar)="esborarEtiqueta($event)"></app-etiqueta>
+    </div>
+  </div>
+  <button mat-fab class="botoMesContainer" *ngIf="mobileQuery.matches" (click)="obrirDialog()"><mat-icon class="botoMes">close</mat-icon> </button>

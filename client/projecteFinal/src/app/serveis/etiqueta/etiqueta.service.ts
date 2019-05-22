@@ -9,7 +9,7 @@ import { Observable } from 'rxjs';
 })
 export class EtiquetaService {
 
-  private url: string = `${this.globals.rutaApi}/etiquetes`;
+  private url: string = `${this.globals.rutaApi}/etiquetes/`;
   constructor(private globals: Globals, private http: HttpClient) { }
 
   /** GET */
@@ -26,8 +26,8 @@ export class EtiquetaService {
   }
 
   /** PUT */
-  actualitzarEtiqueta(etiqueta: Etiqueta): Observable<any> {
-    return this.http.put(this.url, etiqueta);
+  actualitzarEtiqueta(id: Number, etiqueta: Etiqueta): Observable<any> {
+    return this.http.put(this.url + id, etiqueta);
   }
 
   /** DELETE */

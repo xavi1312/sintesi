@@ -1,10 +1,10 @@
 <div mat-dialog-content>
   <p>Modfica el nom de l'etiqueta</p>
   <mat-form-field>
-    <input matInput [(ngModel)]="data.name">
+    <input matInput [(ngModel)]="data.nom">
   </mat-form-field>
 </div>
 <div mat-dialog-actions>
   <button mat-button (click)="onNoClick()">Cancelar</button>
-  <button mat-button [mat-dialog-close]="data.name" cdkFocusInitial>Guardar</button>
+  <button mat-button [mat-dialog-close]="data.nom" cdkFocusInitial>Guardar</button>
 </div>
