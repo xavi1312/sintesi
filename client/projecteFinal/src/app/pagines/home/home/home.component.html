@@ -1,0 +1,37 @@
+<mat-sidenav-container class="example-container" autosize>
+    <mat-sidenav #sidenav [mode]="mobileQuery.matches ? 'over' : 'side'" class="sideNav" role="navigation">
+        <p><button mat-button>Correu@exemple.com</button></p>
+        <mat-nav-list>
+          <a mat-list-item routerLink="/home">
+            <mat-icon class="mr-2">inbox</mat-icon>
+            Totes les tasques
+          </a>
+          <a mat-list-item routerLink="">
+            <mat-icon class="mr-2">calendar_today</mat-icon>
+            Avui
+          </a>
+          <a mat-list-item routerLink="">
+            <mat-icon class="mr-2">calendar_today</mat-icon>
+            Aquesta setmana
+          </a>
+          <a mat-list-item routerLink="/home/etiquetes">
+            <mat-icon class="mr-2">label</mat-icon>
+            Etiquetes
+          </a>
+        </mat-nav-list>
+    </mat-sidenav>
+
+    <mat-sidenav-content role="main">
+        
+        <mat-toolbar color="primary" class="back">
+            <mat-toolbar-row>
+                <mat-icon (click)="sidenav.toggle()" *ngIf="mobileQuery.matches">menu</mat-icon>
+                <span class="example-spacer"></span>
+                <mat-icon class="example-icon" aria-hidden="false" aria-label="Example user verified icon">search</mat-icon>
+            </mat-toolbar-row>
+        </mat-toolbar>
+
+        <router-outlet></router-outlet>
+        
+    </mat-sidenav-content>
+</mat-sidenav-container>

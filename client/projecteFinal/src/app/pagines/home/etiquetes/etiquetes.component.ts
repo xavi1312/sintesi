@@ -1,11 +1,8 @@
-import { Component, OnInit, ChangeDetectorRef, ViewChild, Inject, Output } from '@angular/core';
-import { MediaMatcher } from '@angular/cdk/layout';
+import { Component, OnInit, Inject } from '@angular/core';
 import { EtiquetaService } from 'src/app/serveis/etiqueta/etiqueta.service';
-import { Etiqueta } from 'src/app/classes/etiqueta/etiqueta';
 import { MAT_DIALOG_DATA, MatDialogRef, MatDialog } from '@angular/material';
-import { Observable, of } from 'rxjs';
-import { EventEmitter } from 'events';
 import { Globals, MediaQuerys } from 'src/app/variablesGlobals';
+import { Etiqueta } from 'src/app/classes/etiqueta/etiqueta';
 
 @Component({
   selector: 'app-etiquetes',
@@ -51,7 +48,7 @@ export class EtiquetesComponent implements OnInit {
         this.etiquetes = res;
       },
       err => {
-        alert(err);
+        
       }
     )
   }
@@ -59,6 +56,9 @@ export class EtiquetesComponent implements OnInit {
     this.etiquetaService.getEtiquetes().subscribe(
       res => {
         this.etiquetes = res;
+      },
+      err => {
+        
       }
     )
   }
