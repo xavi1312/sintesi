@@ -11,9 +11,12 @@ export class AppComponent implements OnInit {
   title = 'projecteFinal';
   @ViewChild('sidenav') sidenav;
   mobileQuery;
+  private _mobileQueryListener: () => void;
   
-  constructor(private globals: Globals, private mediaQuerys: MediaQuerys) {
-    this.mediaQuerys.runMedia(this.globals.mobileSize).subscribe( res => this.mobileQuery = res )
+  constructor(private globals: Globals, private mediaQuerys: MediaQuerys, changeDetectorRef: ChangeDetectorRef, media: MediaMatcher) {
+    this.mobileQuery = media.matchMedia('(max-width: 600px)');
+    this._mobileQueryListener = () => changeDetectorRef.detectChanges();
+    this.mobileQuery.addListener(this._mobileQueryListener);
   }
   
   ngOnInit() { 

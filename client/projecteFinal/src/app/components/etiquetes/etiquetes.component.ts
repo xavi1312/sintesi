@@ -14,6 +14,8 @@ import { Globals, MediaQuerys } from 'src/app/variablesGlobals';
 })
 export class EtiquetesComponent implements OnInit {
   mobileQuery;
+  etiquetes: Etiqueta[];
+  etiquetaNova: Etiqueta;
   
   constructor(private globals: Globals, private mediaQuerys: MediaQuerys , private etiquetaService: EtiquetaService, public dialog: MatDialog) {
     this.mediaQuerys.runMedia(this.globals.mobileSize).subscribe( res => this.mobileQuery = res )

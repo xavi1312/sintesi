@@ -1,1 +1,24 @@
-<main>Hola</main>
+<main class="container-fluid">
+    <div class="row">
+        <div class="col-12 titolContainer">
+            <h1 class="h3">Tasques</h1>
+            <button mat-stroked-button *ngIf="!mobileQuery.maches" (click)="obrirDialog()"><span>Nova Etiqueta</span> </button>
+        </div>
+        <mat-divider class="col-12 mb-3 divider"></mat-divider>
+        <mat-card class="col-12 col-md-6">
+            <mat-card-header>
+                <mat-card-title>Pràctica 1</mat-card-title>
+                <mat-card-subtitle>15-12-1998 </mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-actions class="d-flex justify-content-between">
+                <mat-chip-list>
+                    <mat-chip>Mates</mat-chip>
+                    <mat-chip>Català</mat-chip>
+                    <mat-chip color="primary" selected>Castellà</mat-chip>
+                </mat-chip-list>
+                <button mat-flat-button color="primary">Done</button>
+            </mat-card-actions>
+        </mat-card>
+    </div>
+</main>
+<button mat-fab class="botoMesContainer" *ngIf="mobileQuery.matches" (click)="obrirDialog()"><mat-icon class="botoMes">close</mat-icon> </button>
