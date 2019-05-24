@@ -1,0 +1,12 @@
+/* Boto més */
+.botoMesContainer {
+    position: fixed;
+    bottom: 3em;
+    right: 3em;
+    @media screen and (min-width : 600px) {
+        display: none;
+    }
+}
+.botoMes {
+    transform: rotateZ(45deg);
+}

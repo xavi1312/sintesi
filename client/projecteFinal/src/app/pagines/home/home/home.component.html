@@ -1,8 +1,10 @@
 <mat-sidenav-container class="example-container" autosize>
     <mat-sidenav #sidenav [mode]="mobileQuery.matches ? 'over' : 'side'" class="sideNav" role="navigation">
-        <p><button mat-button>Correu@exemple.com</button></p>
+        <p><button mat-button [matMenuTriggerFor]="menu">Correu@exemple.com
+          <mat-icon>keyboard_arrow_down</mat-icon>
+        </button></p>
         <mat-nav-list>
-          <a mat-list-item routerLink="/home">
+          <a mat-list-item routerLink="">
             <mat-icon class="mr-2">inbox</mat-icon>
             Totes les tasques
           </a>
@@ -14,7 +16,7 @@
             <mat-icon class="mr-2">calendar_today</mat-icon>
             Aquesta setmana
           </a>
-          <a mat-list-item routerLink="/home/etiquetes">
+          <a mat-list-item routerLink="etiquetes">
             <mat-icon class="mr-2">label</mat-icon>
             Etiquetes
           </a>
@@ -35,3 +37,10 @@
         
     </mat-sidenav-content>
 </mat-sidenav-container>
+
+<mat-menu #menu="matMenu" xPosition="before">
+    <button mat-menu-item> 
+      <mat-icon>exit_to_app</mat-icon>
+      <span>Tancar Sessió</span>
+    </button>
+  </mat-menu>

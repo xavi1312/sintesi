@@ -1,0 +1,16 @@
+.divider {
+    border-top-width: 2px;
+}
+.titolContainer {
+    height: 80px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+}
+button {
+    display: none;
+    @media screen and (min-width : 600px) {
+        display: block;
+    }
+}

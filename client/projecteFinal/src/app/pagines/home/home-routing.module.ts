@@ -7,6 +7,7 @@ import { AuthGuardService as isAuth } from 'src/app/serveis/auth/auth-guard.serv
 // Components
 import { HomeComponent } from './home/home.component';
 import { EtiquetesComponent } from './etiquetes/etiquetes.component';
+import { TasquesComponent } from './tasques/tasques.component';
 
 const routes: Routes = [
   {
@@ -14,6 +15,10 @@ const routes: Routes = [
     children: [
       {
         path: '',
+        component: TasquesComponent
+      },
+      {
+        path: 'etiquetes',
         component: EtiquetesComponent
       }
     ]

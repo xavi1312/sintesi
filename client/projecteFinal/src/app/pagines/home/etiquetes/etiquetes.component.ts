@@ -1,7 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { EtiquetaService } from 'src/app/serveis/etiqueta/etiqueta.service';
 import { MAT_DIALOG_DATA, MatDialogRef, MatDialog } from '@angular/material';
-import { Globals, MediaQuerys } from 'src/app/variablesGlobals';
+import { Globals } from 'src/app/variablesGlobals';
 import { Etiqueta } from 'src/app/classes/etiqueta/etiqueta';
 
 @Component({
@@ -14,9 +14,7 @@ export class EtiquetesComponent implements OnInit {
   etiquetes: Etiqueta[];
   etiquetaNova: Etiqueta;
   
-  constructor(private globals: Globals, private mediaQuerys: MediaQuerys , private etiquetaService: EtiquetaService, public dialog: MatDialog) {
-    this.mediaQuerys.runMedia(this.globals.mobileSize).subscribe( res => this.mobileQuery = res )
-  }
+  constructor(private etiquetaService: EtiquetaService, public dialog: MatDialog) { }
   
   ngOnInit() { 
     this.getEtiquetes();

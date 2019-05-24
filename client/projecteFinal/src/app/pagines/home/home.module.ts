@@ -24,10 +24,14 @@ import {MatInputModule} from '@angular/material/input';
 import { AuditInterceptorService } from 'src/app/serveis/interceptors/audit-interceptor.service';
 
 // Components
-import { Globals, MediaQuerys } from 'src/app/variablesGlobals';
+import { Globals } from 'src/app/variablesGlobals';
 import { HomeComponent } from './home/home.component';
 import { EtiquetesComponent, DialogNovaEtiqueta } from './etiquetes/etiquetes.component';
-import { EtiquetaComponent, DialogEditarEtiqueta } from './etiquetes/etiqueta/etiqueta.component';
+import { EtiquetaComponent, DialogEditarEtiqueta } from '../../Components/etiqueta/etiqueta.component';
+import { TasquesComponent } from './tasques/tasques.component';
+import { TascaComponent } from 'src/app/Components/tasca/tasca.component';
+import { BotoFixeBottomComponent } from 'src/app/Components/boto-fixe-bottom/boto-fixe-bottom.component';
+import { HeaderComponent } from 'src/app/Components/header/header.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +39,11 @@ import { EtiquetaComponent, DialogEditarEtiqueta } from './etiquetes/etiqueta/et
     EtiquetesComponent,
     EtiquetaComponent,
     DialogEditarEtiqueta,
-    DialogNovaEtiqueta
+    DialogNovaEtiqueta,
+    TasquesComponent,
+    TascaComponent,
+    BotoFixeBottomComponent,
+    HeaderComponent,
   ],
   imports: [
     CommonModule,
@@ -59,6 +67,6 @@ import { EtiquetaComponent, DialogEditarEtiqueta } from './etiquetes/etiqueta/et
   ],
   entryComponents: [EtiquetesComponent, DialogEditarEtiqueta, EtiquetaComponent , DialogNovaEtiqueta],
   bootstrap: [DialogEditarEtiqueta, DialogNovaEtiqueta],
-  providers: [ Globals, MediaQuerys ,{provide: HTTP_INTERCEPTORS, useClass: AuditInterceptorService, multi: true}  ],
+  providers: [ Globals, {provide: HTTP_INTERCEPTORS, useClass: AuditInterceptorService, multi: true}  ],
 })
 export class HomeModule { }

@@ -13,7 +13,7 @@ import { AuditInterceptorService } from './serveis/interceptors/audit-intercepto
 import { AppComponent } from './app.component';
 import { IniciSessioComponent } from './pagines/inici-sessio/inici-sessio.component';
 import { RegistreComponent } from './pagines/registre/registre.component';
-import { Globals, MediaQuerys } from './variablesGlobals';
+import { Globals } from './variablesGlobals';
 
 //Angular Material Components
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
@@ -28,7 +28,7 @@ import {MatIconModule} from '@angular/material/icon';
   declarations: [
     AppComponent,
     IniciSessioComponent,
-    RegistreComponent,
+    RegistreComponent    
   ],
   imports: [
     BrowserModule,
@@ -46,7 +46,7 @@ import {MatIconModule} from '@angular/material/icon';
     MatFormFieldModule,
     MatIconModule
   ],
-  providers: [ Globals, MediaQuerys ,{provide: HTTP_INTERCEPTORS, useClass: AuditInterceptorService, multi: true}  ],
+  providers: [ Globals, {provide: HTTP_INTERCEPTORS, useClass: AuditInterceptorService, multi: true}  ],
   bootstrap: [AppComponent],
   entryComponents: [],
 })
