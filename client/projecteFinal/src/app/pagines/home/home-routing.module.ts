@@ -13,14 +13,10 @@ const routes: Routes = [
   {
     path: '', component: HomeComponent, canActivate: [isAuth],
     children: [
-      {
-        path: '',
-        component: TasquesComponent
-      },
-      {
-        path: 'etiquetes',
-        component: EtiquetesComponent
-      }
+      { path: '', component: TasquesComponent },
+      { path: 'tasques/avui/:data', component: TasquesComponent },
+      { path: 'tasques/setmana/:data', component: TasquesComponent },
+      { path: 'etiquetes', component: EtiquetesComponent }
     ]
   }
 ];

@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { Tasca } from 'src/app/classes/tasca/tasca';
 
 @Component({
   selector: 'app-tasca',
@@ -6,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./tasca.component.scss']
 })
 export class TascaComponent implements OnInit {
-
+  @Input('tasca') tasca: Tasca;
   constructor() { }
 
   ngOnInit() {

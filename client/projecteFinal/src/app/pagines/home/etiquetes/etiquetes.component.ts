@@ -56,7 +56,7 @@ export class EtiquetesComponent implements OnInit {
         this.etiquetes = res;
       },
       err => {
-        
+        alert(err)
       }
     )
   }

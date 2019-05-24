@@ -8,8 +8,8 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class EtiquetaService {
-
   private url: string = `${this.globals.rutaApi}/etiquetes/`;
+  
   constructor(private globals: Globals, private http: HttpClient) { }
 
   /** GET */
