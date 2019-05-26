@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Globals } from 'src/app/variablesGlobals';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +10,7 @@ import { Globals } from 'src/app/variablesGlobals';
 
 export class AuthService {
 
-  constructor(private http: HttpClient, private globals: Globals) { }
+  constructor(private http: HttpClient, private globals: Globals,  private _router: Router) { }
 
   private url = `${this.globals.rutaApi}/auth`;
 
@@ -21,6 +22,7 @@ export class AuthService {
   }
   public logout() {
     localStorage.removeItem('usuariActual');
+    this._router.navigateByUrl('inici-sessio');
   }
 
   public nouToken(token) {

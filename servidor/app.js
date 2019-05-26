@@ -11,6 +11,7 @@ app.set('port', config.port);
 app.use(cors());
 app.use(morgan('dev'));
 app.use(express.json());
+app.disable('etag');
 
 // Routes
 app.use('/api/auth', require('./routes/usuari.routes'));

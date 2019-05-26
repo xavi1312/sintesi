@@ -21,17 +21,17 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 
 // Serveis
-import { AuditInterceptorService } from 'src/app/serveis/interceptors/audit-interceptor.service';
+import { AuditInterceptorService } from '../../serveis/interceptors/audit-interceptor.service';
 
 // Components
-import { Globals } from 'src/app/variablesGlobals';
+import { Globals } from '../../variablesGlobals';
 import { HomeComponent } from './home/home.component';
 import { EtiquetesComponent, DialogNovaEtiqueta } from './etiquetes/etiquetes.component';
 import { EtiquetaComponent, DialogEditarEtiqueta } from '../../Components/etiqueta/etiqueta.component';
 import { TasquesComponent } from './tasques/tasques.component';
-import { TascaComponent } from 'src/app/Components/tasca/tasca.component';
-import { BotoFixeBottomComponent } from 'src/app/Components/boto-fixe-bottom/boto-fixe-bottom.component';
-import { HeaderComponent } from 'src/app/Components/header/header.component';
+import { TascaComponent } from '../../Components/tasca/tasca.component';
+import { BotoFixeBottomComponent } from '../../Components/boto-fixe-bottom/boto-fixe-bottom.component';
+import { HeaderComponent } from '../../Components/header/header.component';
 
 @NgModule({
   declarations: [

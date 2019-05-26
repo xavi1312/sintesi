@@ -53,6 +53,7 @@ export class EtiquetesComponent implements OnInit {
   getEtiquetes() {
     this.etiquetaService.getEtiquetes().subscribe(
       res => {
+        console.log(res)
         this.etiquetes = res;
       },
       err => {

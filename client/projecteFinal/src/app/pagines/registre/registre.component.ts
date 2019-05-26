@@ -48,7 +48,7 @@ export class RegistreComponent implements OnInit {
     res => {
       alert('')
       this.authService.nouToken(res);
-      this.router.navigateByUrl('home');
+      this.router.navigateByUrl('');
     }
       
     )

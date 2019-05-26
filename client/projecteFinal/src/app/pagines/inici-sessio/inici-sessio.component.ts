@@ -37,7 +37,7 @@ export class IniciSessioComponent implements OnInit {
     this.authService.iniciSessio(form).subscribe(
       res => {
         this.authService.nouToken(res)
-        this.router.navigateByUrl('home');
+        this.router.navigateByUrl('');
       }
     )
   }
