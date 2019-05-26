@@ -1,0 +1,14 @@
+<mat-card>
+  <mat-card-header>
+      <mat-card-title>{{tasca.nom}}</mat-card-title>
+      <mat-card-subtitle>{{tasca.alarma}}</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-actions class="d-flex justify-content-between">
+    <div class="etiquetesContaier">
+      <mat-chip-list>
+          <mat-chip *ngFor="let etiqueta of tasca.etiquetes">{{etiqueta.nom}}</mat-chip>
+      </mat-chip-list>
+    </div>
+      <button mat-flat-button color="primary">Done</button>
+  </mat-card-actions>
+</mat-card>

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Globals } from 'src/app/variablesGlobals';
 import { Tasca } from 'src/app/classes/tasca/tasca';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -10,13 +10,30 @@ import { Observable } from 'rxjs';
 export class TascaService {
 
   private url: string = `${this.globals.rutaApi}/tasques`;
-  constructor(private globals: Globals, private http: HttpClient) { }
+  private _tasques: BehaviorSubject<Tasca[]>;
+  private dataStore: { tasques: Tasca[] };
+
+  constructor(private globals: Globals, private http: HttpClient) { 
+    this.dataStore = { tasques: [] };
+    this._tasques = <BehaviorSubject<Tasca[]>>new BehaviorSubject([]);
+  }
 
   /** GET */
-  getTasques(): Observable<Tasca> {
-    return this.http.get<Tasca>(this.url);
+  getTasquesObserbable() {
+    this._tasques.asObservable().subscribe(res => console.log(res));
+    return this._tasques.asObservable();
   }
-  getTasca(id: Number): Observable<Tasca> {
+
+  getTasques() {
+    this.http.get<Tasca[]>(this.url).subscribe( data => {
+      this.dataStore.tasques = data;
+      this._tasques.next(Object.assign({}, this.dataStore).tasques);
+    },
+    err => {
+      alert(err)
+    })
+  }
+  getTasca(id: Number | String): Observable<Tasca> {
     return this.http.get<Tasca>(this.url+ id);
   }
   getTascaAbansData(data: Date): Observable<Tasca[]> {
@@ -36,5 +53,10 @@ export class TascaService {
   /** DELETE */
   esborrarTasca(id: Number): Observable<any> {
     return this.http.delete(this.url+ id);
+  }
+
+  /**  */
+  private actualitzarArrayTassques() {
+    
   }
 }

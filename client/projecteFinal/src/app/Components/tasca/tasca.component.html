@@ -1,14 +1,51 @@
-<mat-card>
-  <mat-card-header>
-      <mat-card-title>{{tasca.nom}}</mat-card-title>
-      <mat-card-subtitle>{{tasca.alarma}}</mat-card-subtitle>
-  </mat-card-header>
-  <mat-card-actions class="d-flex justify-content-between">
-    <div class="etiquetesContaier">
-      <mat-chip-list>
-          <mat-chip *ngFor="let etiqueta of tasca.etiquetes">{{etiqueta.nom}}</mat-chip>
-      </mat-chip-list>
+<main class="container-fluid">
+    <div class="row pt-3">
+        <div class="col-12 col-md-5">
+            <mat-form-field class="w-100 inputNom">
+                <input matInput [value]="tasca.nom">
+            </mat-form-field>
+        </div>
+        <div class="col-12 col-md-6">
+            <app-select-autocompletat></app-select-autocompletat>
+        </div>
+        <div class="d-none d-md-flex col-md-1 align-items-center justify-content-center">
+            <button mat-raised-button color="primary"><mat-icon>save</mat-icon></button>
+            <button mat-icon-button [matMenuTriggerFor]="menu">
+                <mat-icon>more_vert</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu">
+            <button mat-menu-item>
+                <mat-icon>delete</mat-icon>
+                <span>Esborrar</span>
+            </button>
+            <button mat-menu-item *ngIf="!tasca.alarma; else isAlarma">
+                <mat-icon>alarm</mat-icon>
+                <span>Alarma</span>
+            </button>
+            <button mat-menu-item *ngIf="tasca.alarma; else noAlarma">
+                <mat-icon>alarm_off</mat-icon>
+                <span>Desactivar alarma</span>
+            </button>
+            </mat-menu>
+                  
+        </div>
     </div>
-      <button mat-flat-button color="primary">Done</button>
-  </mat-card-actions>
-</mat-card>
+    <div class="row">
+        <editor class="col-12 editor" apiKey="test" [init]="{height: 500}" [(ngModel)]="tasca.contingut"></editor>
+    </div>
+</main>
+
+<!-------------- Templates -------------->
+<ng-template #isAlarma>
+    <button mat-menu-item disabled>
+        <mat-icon>alarm</mat-icon>
+        <span>Alarma</span>
+    </button>
+</ng-template>
+<ng-template #noAlarma>
+    <button mat-menu-item disabled>
+        <mat-icon>alarm_off</mat-icon>
+        <span>Desactivar alarma</span>
+    </button>
+</ng-template>
+

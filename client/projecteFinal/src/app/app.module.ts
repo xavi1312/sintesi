@@ -28,7 +28,7 @@ import {MatIconModule} from '@angular/material/icon';
   declarations: [
     AppComponent,
     IniciSessioComponent,
-    RegistreComponent    
+    RegistreComponent
   ],
   imports: [
     BrowserModule,

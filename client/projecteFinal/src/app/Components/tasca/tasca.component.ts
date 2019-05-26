@@ -1,5 +1,8 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Tasca } from 'src/app/classes/tasca/tasca';
+import { ActivatedRoute, Router } from '@angular/router';
+import { TascaService } from 'src/app/serveis/tasca/tasca.service';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-tasca',
@@ -7,16 +10,19 @@ import { Tasca } from 'src/app/classes/tasca/tasca';
   styleUrls: ['./tasca.component.scss']
 })
 export class TascaComponent implements OnInit {
-  @Input('tasca') tasca: Tasca = {
-    nom: 'Tasca 1',
-    contingut: '',
-    acabat: false,
-    alarma: new Date(),
-    etiquetes: [{nom: 'Mates'}, {nom: 'Cole'}, {nom: 'Arrels cuadrades'}]
-  };
-  constructor() { }
 
+  tasca: Tasca;
+  guardar: BehaviorSubject<Boolean> = new BehaviorSubject<Boolean>(false);
+
+  constructor(private _route: ActivatedRoute, private _router: Router, private _tasquaService: TascaService) {
+    (_route.snapshot.params['id']) ? this.getTasca(_route.snapshot.params['id']) : this.tasca = new Tasca; this.tasca.nom = "Nova tasca"
+    
+  }
   ngOnInit() {
+
   }
 
+  getTasca(id: String | Number) {
+    this._tasquaService.getTasca(id).subscribe(res => this.tasca = res)
+  }
 }

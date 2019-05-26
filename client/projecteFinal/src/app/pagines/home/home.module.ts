@@ -6,6 +6,9 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 // Ruting
 import { HomeRoutingModule } from './home-routing.module';
 
+// Tinymce
+import { EditorModule } from '@tinymce/tinymce-angular';
+
 // components anngular material
 import {MatDividerModule} from '@angular/material/divider';
 import {MatMenuModule} from '@angular/material/menu';
@@ -19,6 +22,7 @@ import {MatDialogModule} from '@angular/material/dialog';
 import {MatListModule} from '@angular/material/list';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
+import { MatAutocompleteModule } from '@angular/material';
 
 // Serveis
 import { AuditInterceptorService } from '../../serveis/interceptors/audit-interceptor.service';
@@ -32,6 +36,8 @@ import { TasquesComponent } from './tasques/tasques.component';
 import { TascaComponent } from '../../Components/tasca/tasca.component';
 import { BotoFixeBottomComponent } from '../../Components/boto-fixe-bottom/boto-fixe-bottom.component';
 import { HeaderComponent } from '../../Components/header/header.component';
+import { TascaLlistaComponent } from 'src/app/Components/tasca-llista/tasca-llista.component';
+import { SelectAutocompletatComponent } from 'src/app/Components/select-autocompletat/select-autocompletat.component';
 
 @NgModule({
   declarations: [
@@ -44,13 +50,15 @@ import { HeaderComponent } from '../../Components/header/header.component';
     TascaComponent,
     BotoFixeBottomComponent,
     HeaderComponent,
+    TascaLlistaComponent,
+    SelectAutocompletatComponent
   ],
   imports: [
     CommonModule,
     HomeRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    
+    EditorModule,
 
     // Angular material
     MatInputModule,
@@ -64,7 +72,8 @@ import { HeaderComponent } from '../../Components/header/header.component';
     MatChipsModule,
     MatIconModule,
     MatDialogModule,
-    MatListModule
+    MatListModule,
+    MatAutocompleteModule
   ],
   entryComponents: [EtiquetesComponent, DialogEditarEtiqueta, EtiquetaComponent , DialogNovaEtiqueta],
   bootstrap: [DialogEditarEtiqueta, DialogNovaEtiqueta],
