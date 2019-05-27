@@ -1,6 +1,7 @@
 import { Etiqueta } from '../etiqueta/etiqueta';
 
 export class Tasca {
+    _id: Number | String
     nom: String
     contingut: String
     acabat: Boolean
@@ -9,5 +10,7 @@ export class Tasca {
     
     constructor(){
         this.acabat = false;
+        this.nom = 'Nova Tasca';
+        this.etiquetes = [];
     }
 }

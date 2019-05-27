@@ -1,20 +1,20 @@
-<main class="container-fluid">
+<main class="container-fluid" *ngIf="tasca != undefined || tasca != null">
     <div class="row pt-3">
         <div class="col-12 col-md-5">
             <mat-form-field class="w-100 inputNom">
-                <input matInput [value]="tasca.nom">
+                <input matInput [(ngModel)]="tasca.nom">
             </mat-form-field>
         </div>
         <div class="col-12 col-md-6">
-            <app-select-autocompletat></app-select-autocompletat>
+            <app-select-autocompletat [etiquetes]="tasca.etiquetes" (canviEtiquetes)="canviEtiquetes($event)"></app-select-autocompletat>
         </div>
         <div class="d-none d-md-flex col-md-1 align-items-center justify-content-center">
-            <button mat-raised-button color="primary"><mat-icon>save</mat-icon></button>
+            <button mat-raised-button color="primary" (click)="guardarTasca()"><mat-icon>save</mat-icon></button>
             <button mat-icon-button [matMenuTriggerFor]="menu">
                 <mat-icon>more_vert</mat-icon>
             </button>
             <mat-menu #menu="matMenu">
-            <button mat-menu-item>
+            <button mat-menu-item *ngIf="isNova == false">
                 <mat-icon>delete</mat-icon>
                 <span>Esborrar</span>
             </button>

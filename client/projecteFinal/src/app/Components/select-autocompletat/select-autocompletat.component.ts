@@ -17,58 +17,58 @@ import { EtiquetaService } from 'src/app/serveis/etiqueta/etiqueta.service';
 export class SelectAutocompletatComponent implements OnInit {
   visible = true; selectable = true; removable = true; addOnBlur = true;
   separatorKeysCodes: number[] = [ENTER, COMMA];
-  fruitCtrl = new FormControl();
-  etiquetesFiltrades: Observable<Etiqueta[]>;
-  fruits: Etiqueta[] = [];
-  totesEtiquetes: Etiqueta[] = [{_id: 1, nom: 'etiqueta1'}, {_id: 2, nom: 'etiqueta2'}, {_id: 3, nom: 'etiqueta3'}, {_id: 4, nom: 'etiqueta4'}];
+  etiquetaCtrl = new FormControl();
+  etiquetesFiltrades: Observable<string[]>;
+  totesEtiquetes: any = [];
+  @Input('etiquetes') etiquetes: any[];
+  @Output() canviEtiquetes = new EventEmitter();
 
-  @ViewChild('fruitInput') fruitInput: ElementRef<HTMLInputElement>;
-  @ViewChild('auto') matAutocomplete: MatAutocomplete;
+  @ViewChild('fruitInput') fruitInput: ElementRef;
 
-  constructor() {
-    this.etiquetesFiltrades = this.fruitCtrl.valueChanges.pipe(
+  constructor(private _etiquetaService: EtiquetaService) {
+    _etiquetaService.getEtiquetes().subscribe(res => {this.totesEtiquetes = res})
+
+    this.etiquetesFiltrades = this.etiquetaCtrl.valueChanges.pipe(
       startWith(null),
-      map((fruit: Etiqueta | null) => fruit ? this._filter(fruit) : this.totesEtiquetes.slice())
-    );
+      map((etiqueta: string | null) => etiqueta ? this._filter(etiqueta) : this.totesEtiquetes.slice()));
   }
   ngOnInit() { }
 
   add(event: MatChipInputEvent): void {
-    // Add fruit only when MatAutocomplete is not open
-    // To make sure this does not conflict with OptionSelected Event
-    if (!this.matAutocomplete.isOpen) {
-      const input = event.input;
-      const value = event.value;
-
-      // Add our fruit
-      if ((value || '')) {
-        this.fruits.push(value);
-      }
-
-      // Reset the input value
-      if (input) {
-        input.value = '';
-      }
-
-      this.fruitCtrl.setValue(null);
+    const input = event.input;
+    const value = event.value;
+    // Afegir etiqueta
+    if ((value || '').trim()) {
+      /*this.etiquetes.push({
+          id: Math.random(),
+          name: value.trim()
+      });*/
     }
+
+    // Reset the input value
+    if (input) {
+      input.value = '';
+    }
+
+    this.etiquetaCtrl.setValue(null);
   }
 
-  remove(fruit: string): void {
-    const index = this.fruits.indexOf(fruit);
-
-    if (index >= 0) {
-      this.fruits.splice(index, 1);
-    }
+  remove(etiqueta, indx): void {
+    this.etiquetes.splice(indx, 1);
+    this.canviValorInput()
   }
 
   selected(event: MatAutocompleteSelectedEvent): void {
-    this.fruits.push(event.option.viewValue);
+    this.etiquetes.push(event.option.value)
     this.fruitInput.nativeElement.value = '';
-    this.fruitCtrl.setValue(null);
+    this.etiquetaCtrl.setValue(null);
+    this.canviValorInput()
   }
 
-  private _filter(value: Etiqueta): Etiqueta[] {
+  private _filter(value: any): string[] {
     return this.totesEtiquetes.filter(fruit => fruit._id === value._id);
+  }
+  private canviValorInput() {
+    this.canviEtiquetes.emit(this.etiquetes)
   }
 }

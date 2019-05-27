@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Tasca } from 'src/app/classes/tasca/tasca';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-tasca-llista',
@@ -8,9 +9,15 @@ import { Tasca } from 'src/app/classes/tasca/tasca';
 })
 export class TascaLlistaComponent implements OnInit {
   @Input('tasca') tasca: Tasca;
-  constructor() { }
+  constructor(private _router: Router) { }
 
   ngOnInit() {
   }
 
+  editarTasca() {
+    this._router.navigate(['/tasca/', this.tasca._id])
+  }
+  tascaFeta() {
+
+  }
 }

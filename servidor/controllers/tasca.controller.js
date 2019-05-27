@@ -21,7 +21,7 @@ tascaCtrl.unaTasca = (req, res) => {
         if(err) return res.status(500).send({message: `Hi ha hagut un problema al fer la petició: ${err}`}) 
         else if(!tasca) return req.status(404).send({message: `La Tasca no existeix`}) 
 
-        res.status(200).send({tasca}) 
+        res.status(200).send(tasca) 
     });
 
 };
@@ -33,8 +33,8 @@ tascaCtrl.novaTasca = (req, res) => {
         contingut: req.body.contingut,
         usuari: req.user.sub
     })
-    if(req.body.alarma) tasca.alarma = req.body.alarma
-    if(req.body.etiquetes) tasca.alarma = req.body.etiquetes
+    if(req.body.alarma != undefined) tasca.alarma = req.body.alarma
+    if(req.body.etiquetes != undefined || req.body.etiquetes != []) tasca.etiquetes = req.body.etiquetes
 
     tasca.save((err) => {
         if(err) return res.status(500).send({message: `s'ha produït un error al guardar la tasca: ${err}`});
