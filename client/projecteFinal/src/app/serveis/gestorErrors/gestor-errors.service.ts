@@ -13,6 +13,7 @@ export class GestorErrorsService {
     this.error = nouError;
     console.log("ERROR MANAGER: \n")
     console.table(this.error)
+    alert()
   }
   getError(): Observable<any> {
     return of(this.error);

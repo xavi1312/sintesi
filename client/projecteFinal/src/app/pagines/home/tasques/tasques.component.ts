@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./tasques.component.scss']
 })
 export class TasquesComponent implements OnInit {
-  private tasques$: Observable<Tasca[]>; 
+  tasques$: Tasca[]; 
 
   constructor(private _route: ActivatedRoute, private _router: Router, private _tasquaService: TascaService) {
     const isParametre = _route.snapshot.paramMap.get("data")
@@ -22,7 +22,9 @@ export class TasquesComponent implements OnInit {
 
   ngOnInit() {
     this._tasquaService.getTasques();
-    this.tasques$ = this._tasquaService.getTasquesObserbable()
+    this._tasquaService.getTasquesObserbable().subscribe(
+      res =>{ this.tasques$ = res; alert(res)}
+    )
   }
 
   novaTasca() {

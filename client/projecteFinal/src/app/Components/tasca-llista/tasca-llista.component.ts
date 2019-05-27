@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Tasca } from 'src/app/classes/tasca/tasca';
 import { Router } from '@angular/router';
+import { TascaService } from 'src/app/serveis/tasca/tasca.service';
 
 @Component({
   selector: 'app-tasca-llista',
@@ -9,7 +10,7 @@ import { Router } from '@angular/router';
 })
 export class TascaLlistaComponent implements OnInit {
   @Input('tasca') tasca: Tasca;
-  constructor(private _router: Router) { }
+  constructor(private _router: Router, private _tascaService: TascaService) { }
 
   ngOnInit() {
   }
@@ -18,6 +19,7 @@ export class TascaLlistaComponent implements OnInit {
     this._router.navigate(['/tasca/', this.tasca._id])
   }
   tascaFeta() {
-
+    this.tasca.acabada = true;
+    this._tascaService.actualitzarTasca(this.tasca._id, this.tasca)
   }
 }

@@ -4,12 +4,12 @@ export class Tasca {
     _id: Number | String
     nom: String
     contingut: String
-    acabat: Boolean
+    acabada: Boolean
     alarma: Date
     etiquetes: Etiqueta[]
     
     constructor(){
-        this.acabat = false;
+        this.acabada = false;
         this.nom = 'Nova Tasca';
         this.etiquetes = [];
     }

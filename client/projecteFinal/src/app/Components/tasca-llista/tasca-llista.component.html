@@ -1,5 +1,5 @@
-<mat-card (click)="editarTasca()">
-  <mat-card-header>
+<mat-card>
+  <mat-card-header (click)="editarTasca()">
       <mat-card-title>{{tasca.nom}}</mat-card-title>
       <mat-card-subtitle>{{tasca.alarma}}</mat-card-subtitle>
   </mat-card-header>
@@ -9,6 +9,6 @@
           <mat-chip *ngFor="let etiqueta of tasca.etiquetes">{{etiqueta.nom}}</mat-chip>
       </mat-chip-list>
     </div>
-      <button mat-flat-button color="primary">Done</button>
+    <button mat-flat-button color="primary" (click)="tascaFeta()">Done</button>
   </mat-card-actions>
 </mat-card>

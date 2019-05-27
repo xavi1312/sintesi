@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { GestorErrorsService } from '../gestorErrors/gestor-errors.service';
 import { Router } from '@angular/router';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -26,13 +27,16 @@ export class TascaService {
   }
 
   getTasques() {
-    this._http.get<Tasca[]>(this.url).subscribe( data => {
+    this._http.get<Tasca[]>(this.url).pipe(
+      map(tasca => console.log([tasca]))
+    )
+    /*.subscribe( data => {
       this.dataStore.tasques = data;
       this._tasques.next(Object.assign({}, this.dataStore).tasques);
     },
     err => {
       this._gestorErrorsService.nouError(err);
-    })
+    })*/
   }
   getTasca(id: Number | String): Observable<Tasca> {
     return this._http.get<Tasca>(this.url+ id);
@@ -46,6 +50,7 @@ export class TascaService {
     this._http.post<Tasca>(this.url, tasca).subscribe(
       res => {
         this.dataStore.tasques.unshift(res)
+        this._tasques.next(Object.assign({}, this.dataStore).tasques);
       },
       err => {
         this._gestorErrorsService.nouError(err);
@@ -58,7 +63,8 @@ export class TascaService {
     this._http.put<Tasca>(this.url+ id, tasca).subscribe(
       res => {
         this.esborrarObjecteArray(res);
-        this.dataStore.tasques.unshift(res);
+        if(!res.acabada || !res.acabada == undefined) { this.dataStore.tasques.unshift(res); }
+        this._tasques.next(Object.assign({}, this.dataStore).tasques);
       },
       err => this._gestorErrorsService.nouError(err)
     )
@@ -69,7 +75,7 @@ export class TascaService {
     this._http.delete(this.url+ id).subscribe(
       res => { 
         this.esborrarObjecteArray(res)
-
+        this._tasques.next(Object.assign({}, this.dataStore).tasques);
       },
       err => {
         this._gestorErrorsService.nouError(err)
