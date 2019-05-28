@@ -44,37 +44,22 @@ etiquetaCtrl.novaEtiqueta = (req, res) => {
 etiquetaCtrl.actualitzarEtiqueta = async (req, res) => {
     const novaEtiqueta = req.body
     const idEtiqueta = req.params.idEtiqueta
-    const idUsuari = req.user.sub
 
     await Etiqueta.findByIdAndUpdate(idEtiqueta, novaEtiqueta, (err) => {
         if(err) return res.status(500).send({message: `S'ha produït un error al actualitzar la etiqueta: ${err}`})
+
+        res.status(200).send(novaEtiqueta)
     })
-
-    Etiqueta.find({}).populate('tasques','nom _id').where('usuari').equals(idUsuari).exec((err, etiquetes) => {
-        if(err) return req.status(500).send({message: `No s'han trobat etiquetes: ${err}`})
-
-        res.status(200).send(etiquetes)
-    });
 }
 
 /** Esborrar una sola etiqueta */
-etiquetaCtrl.esborrarEtiqueta = async (req, res) => {
+etiquetaCtrl.esborrarEtiqueta = (req, res) => {
     const idEtiqueta = req.params.idEtiqueta
-    const idUsuari = req.user.sub
 
-    console.log("ID ETIQUETA: "+idEtiqueta+"\n")
-
-    await Etiqueta.findByIdAndRemove(idEtiqueta, (err) => {
+    Etiqueta.findByIdAndRemove(idEtiqueta, (err, etiquetaEsborrada) => {
         if(err) return res.status(500).send(`Hi ha hagut un error al eliminar l'etiqueta: ${err}`)
-        console.log("dins")
+        res.status(200).send(etiquetaEsborrada)
     })
-    console.log("segueix")
-    
-    Etiqueta.find({}).populate('tasques','nom _id').where('usuari').equals(idUsuari).exec((err, etiquetes) => {
-        if(err) return req.status(500).send({message: `No s'han trobat etiquetes: ${err}`})
-
-        res.status(200).send(etiquetes)
-    });
 }
 
 module.exports = etiquetaCtrl;

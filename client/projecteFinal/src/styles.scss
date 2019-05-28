@@ -27,7 +27,7 @@ $theme: mat-light-theme($primary, $accent);
 
 body {
   font-family: Roboto, 'Helvetica Neue', sans-serif;
-
+  --bg-dialog: white;
   // Helps fonts on OSX looks more consistent with other systems
   // Isn't currently in button styles due to performance concerns
   * {
@@ -66,6 +66,7 @@ body {
     font-size: 20px;
   }
 }
+
 /* Component */
 .container-fluid {
   padding-left: 2em;

@@ -3,6 +3,9 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
+// DateTime picker
+import { MatDatepickerModule, MatMomentDateModule } from '@coachcare/datepicker';
+
 // Ruting
 import { HomeRoutingModule } from './home-routing.module';
 
@@ -34,7 +37,7 @@ import { HomeComponent } from './home/home.component';
 import { EtiquetesComponent, DialogNovaEtiqueta } from './etiquetes/etiquetes.component';
 import { EtiquetaComponent, DialogEditarEtiqueta } from '../../Components/etiqueta/etiqueta.component';
 import { TasquesComponent } from './tasques/tasques.component';
-import { TascaComponent } from '../../Components/tasca/tasca.component';
+import { TascaComponent, DialogAlarma } from '../../Components/tasca/tasca.component';
 import { BotoFixeBottomComponent } from '../../Components/boto-fixe-bottom/boto-fixe-bottom.component';
 import { HeaderComponent } from '../../Components/header/header.component';
 import { TascaLlistaComponent } from 'src/app/Components/tasca-llista/tasca-llista.component';
@@ -52,7 +55,8 @@ import { SelectAutocompletatComponent } from 'src/app/Components/select-autocomp
     BotoFixeBottomComponent,
     HeaderComponent,
     TascaLlistaComponent,
-    SelectAutocompletatComponent
+    SelectAutocompletatComponent,
+    DialogAlarma
   ],
   imports: [
     CommonModule,
@@ -75,10 +79,14 @@ import { SelectAutocompletatComponent } from 'src/app/Components/select-autocomp
     MatDialogModule,
     MatListModule,
     MatAutocompleteModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+
+    // Datetime picker
+    MatDatepickerModule,
+    MatMomentDateModule
   ],
-  entryComponents: [EtiquetesComponent, DialogEditarEtiqueta, EtiquetaComponent , DialogNovaEtiqueta],
-  bootstrap: [DialogEditarEtiqueta, DialogNovaEtiqueta],
+  entryComponents: [EtiquetesComponent, DialogEditarEtiqueta, EtiquetaComponent, DialogNovaEtiqueta, TascaComponent, DialogAlarma],
+  bootstrap: [DialogEditarEtiqueta, DialogNovaEtiqueta, DialogAlarma],
   providers: [ Globals, {provide: HTTP_INTERCEPTORS, useClass: AuditInterceptorService, multi: true}  ],
 })
 export class HomeModule { }

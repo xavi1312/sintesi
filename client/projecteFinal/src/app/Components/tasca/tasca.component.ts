@@ -1,16 +1,44 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { Tasca } from 'src/app/classes/tasca/tasca';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TascaService } from 'src/app/serveis/tasca/tasca.service';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { GestorErrorsService } from 'src/app/serveis/gestorErrors/gestor-errors.service';
-import { MatSnackBar } from '@angular/material';
+import { MatSnackBar, MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { Globals } from 'src/app/variablesGlobals';
+import * as moment from 'moment';
+
+// Datetime picker
+import { MatDatepickerIntl, MAT_DATE_FORMATS } from '@coachcare/datepicker';
+const PW_DATE_FORMATS = {
+  parse: {
+    dateInput: 'LLL',
+    datetime: 'LLL',
+    date: 'L',
+    time: 'LT'
+  },
+  display: {
+    dateInput: 'LLL',
+    date: 'LL',
+    datetime: 'LLL',
+    time: 'LT',
+    dateA11yLabel: 'L',
+    monthDayLabel: 'D MMM',
+    monthDayA11yLabel: 'D MMMM',
+    monthYearLabel: 'MMMM YYYY',
+    monthYearA11yLabel: 'MMMM YYYY',
+    timeLabel: 'LT'
+  }
+};
 
 @Component({
   selector: 'app-tasca',
   templateUrl: './tasca.component.html',
-  styleUrls: ['./tasca.component.scss']
+  styleUrls: ['./tasca.component.scss'],
+  providers : [
+    { provide: MatDatepickerIntl },
+    { provide: MAT_DATE_FORMATS, useValue: PW_DATE_FORMATS }
+  ]
 })
 export class TascaComponent implements OnInit {
 
@@ -19,7 +47,7 @@ export class TascaComponent implements OnInit {
 
   guardar: BehaviorSubject<Boolean> = new BehaviorSubject<Boolean>(false);
 
-  constructor(private globals: Globals, private _route: ActivatedRoute, private _router: Router, private _tasquaService: TascaService, private _snackBar: MatSnackBar, private _gestorErrors: GestorErrorsService) {
+  constructor(private globals: Globals, private _route: ActivatedRoute, private _router: Router, private _tasquaService: TascaService, private _snackBar: MatSnackBar, private _gestorErrors: GestorErrorsService, public dialog: MatDialog) {
     (_route.snapshot.params['id']) ? this.getTasca(_route.snapshot.params['id']) : this.tasca = new Tasca();
     _gestorErrors.getMissatgeTasques().subscribe(missatge => this.openSnackBar(missatge))
     _gestorErrors.getErrorTasques().subscribe(missatge => this.openSnackBar(missatge))
@@ -41,14 +69,11 @@ export class TascaComponent implements OnInit {
       this.actualitzarTasca()
     }
   }
-  esborrarTasca() {
-    this._tasquaService.esborrarTasca(this.tasca._id).subscribe(res => this._router.navigateByUrl(''))
-  }
+  esborrarTasca() { this._tasquaService.esborrarTasca(this.tasca._id).subscribe(res => this._router.navigateByUrl('')) }
   actualitzarTasca() { this._tasquaService.actualitzarTasca(this.tasca._id, this.tasca).subscribe() }
+  
   // Quan es canvia una etiqueta a l'input
-  canviEtiquetes(etiquetes) {
-    this.tasca.etiquetes = etiquetes;
-  }
+  canviEtiquetes(etiquetes) { this.tasca.etiquetes = etiquetes; }
 
   openSnackBar(missatge: string, accio?: string) {
     if(!accio) accio = 'Dacord'
@@ -58,4 +83,32 @@ export class TascaComponent implements OnInit {
       });
     }
   }
+
+  obrirDialogAlarma(): void {
+    const dialogRef = this.dialog.open(DialogAlarma, {
+      width: '250px',
+      data: this.tasca
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if(result) {
+        this.tasca.alarma = moment(result).toDate()
+      }
+    });
+  }
+}
+@Component({
+  selector: 'DialogAlarma',
+  templateUrl: 'dialogAlarma.html'
+})
+export class DialogAlarma {
+
+  constructor(
+    public dialogRef: MatDialogRef<DialogAlarma>,
+    @Inject(MAT_DIALOG_DATA) public data) {}
+
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
+
 }

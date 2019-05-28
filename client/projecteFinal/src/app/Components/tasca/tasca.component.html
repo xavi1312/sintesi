@@ -18,11 +18,11 @@
                 <mat-icon>delete</mat-icon>
                 <span>Esborrar</span>
             </button>
-            <button mat-menu-item *ngIf="!tasca.alarma; else isAlarma">
+            <button mat-menu-item (click)="obrirDialogAlarma()">
                 <mat-icon>alarm</mat-icon>
                 <span>Recordatori</span>
             </button>
-            <button mat-menu-item *ngIf="tasca.alarma; else noAlarma" (click)="tasca.alarma = null; actualitzarTasca()">
+            <button mat-menu-item *ngIf="tasca.alarma; else noAlarma" (click)="tasca.alarma = undefined">
                 <mat-icon>alarm_off</mat-icon>
                 <span>Desactivar recordatori</span>
             </button>
@@ -36,12 +36,6 @@
 </main>
 
 <!-------------- Templates -------------->
-<ng-template #isAlarma>
-    <button mat-menu-item disabled>
-        <mat-icon>alarm</mat-icon>
-        <span>Alarma</span>
-    </button>
-</ng-template>
 <ng-template #noAlarma>
     <button mat-menu-item disabled>
         <mat-icon>alarm_off</mat-icon>

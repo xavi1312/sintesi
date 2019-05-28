@@ -15,7 +15,7 @@ export class TascaService {
   private url: string = `${this._globals.rutaApi}/tasques/`;
   private dataStore: { tasques: Tasca[] };
   private _tasques: BehaviorSubject<Tasca[]>;
-  public tasques$;
+  public tasques$: Observable<Tasca[]>;
 
   constructor(private _globals: Globals, private _http: HttpClient, private _gestorErrorsService: GestorErrorsService, private _router: Router) { 
     this.dataStore = { tasques: [] };
