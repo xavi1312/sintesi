@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import {MatTooltipModule} from '@angular/material/tooltip';
 
 // Ruting
 import { AppRoutingModule } from './app-routing.module';
@@ -44,7 +45,8 @@ import {MatIconModule} from '@angular/material/icon';
     MatInputModule,
     MatAutocompleteModule,
     MatFormFieldModule,
-    MatIconModule
+    MatIconModule,
+    MatTooltipModule
   ],
   providers: [ Globals, {provide: HTTP_INTERCEPTORS, useClass: AuditInterceptorService, multi: true}  ],
   bootstrap: [AppComponent],

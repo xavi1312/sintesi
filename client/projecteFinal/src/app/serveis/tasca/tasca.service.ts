@@ -2,10 +2,10 @@ import { Injectable } from '@angular/core';
 import { Globals } from 'src/app/variablesGlobals';
 import { Tasca } from 'src/app/classes/tasca/tasca';
 import { HttpClient } from '@angular/common/http';
-import { Observable, BehaviorSubject } from 'rxjs';
+import { Observable, BehaviorSubject, throwError } from 'rxjs';
 import { GestorErrorsService } from '../gestorErrors/gestor-errors.service';
 import { Router } from '@angular/router';
-import { map } from 'rxjs/operators';
+import { map, share, catchError } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -13,73 +13,93 @@ import { map } from 'rxjs/operators';
 export class TascaService {
 
   private url: string = `${this._globals.rutaApi}/tasques/`;
-  private _tasques: BehaviorSubject<Tasca[]>;
   private dataStore: { tasques: Tasca[] };
+  private _tasques: BehaviorSubject<Tasca[]>;
+  public tasques$;
 
   constructor(private _globals: Globals, private _http: HttpClient, private _gestorErrorsService: GestorErrorsService, private _router: Router) { 
     this.dataStore = { tasques: [] };
     this._tasques = <BehaviorSubject<Tasca[]>>new BehaviorSubject([]);
+    this.tasques$ = this._tasques.asObservable();
   }
 
   /** GET */
-  getTasquesObserbable() {
-    return this._tasques.asObservable();
-  }
-
-  getTasques() {
-    this._http.get<Tasca[]>(this.url).pipe(
-      map(tasca => console.log([tasca]))
+  getTasques(): Observable<Tasca[]> {
+    return this._http.get<Tasca[]>(this.url).pipe(
+      catchError(err => { 
+        this._gestorErrorsService.nouErrorTasques(err)
+        return throwError(err)
+      }),
+      map(tasques => {
+        this.dataStore.tasques = tasques;
+        this.actualitzarStore()
+        return tasques
+      })
     )
-    /*.subscribe( data => {
-      this.dataStore.tasques = data;
-      this._tasques.next(Object.assign({}, this.dataStore).tasques);
-    },
-    err => {
-      this._gestorErrorsService.nouError(err);
-    })*/
   }
   getTasca(id: Number | String): Observable<Tasca> {
-    return this._http.get<Tasca>(this.url+ id);
+    return this._http.get<Tasca>(this.url+ id).pipe(
+      catchError(err => {
+        this._gestorErrorsService.nouErrorTasques(err)
+        return throwError(err)
+      })
+    )
   }
   getTascaAbansData(data: Date): Observable<Tasca[]> {
-    return this._http.get<Tasca[]>(this.url+ 'filtre/'+ data);
+    return this._http.get<Tasca[]>(this.url+ 'filtre/'+ data).pipe(
+      catchError(err => {
+        this._gestorErrorsService.nouErrorTasques(err)
+        return throwError(err);
+      })
+    )
   }
 
   /** POST */
-  novaTasca(tasca: Tasca) {
-    this._http.post<Tasca>(this.url, tasca).subscribe(
-      res => {
-        this.dataStore.tasques.unshift(res)
-        this._tasques.next(Object.assign({}, this.dataStore).tasques);
-      },
-      err => {
-        this._gestorErrorsService.nouError(err);
-      }
+  novaTasca(tasca: Tasca): Observable<Tasca> {
+    return this._http.post<Tasca>(this.url, tasca).pipe(
+      catchError(err => { 
+        this._gestorErrorsService.nouErrorTasques(err); 
+        return throwError(err)
+      }),
+      map(novaTasca => {
+        this.dataStore.tasques.unshift(novaTasca)
+        this.actualitzarStore()
+        this._gestorErrorsService.nouMissatgeTasques("S'ha guardat la tasca")
+        return novaTasca
+      })
     )
   }
 
   /** PUT */
-  actualitzarTasca(id: Number | String, tasca:Tasca) {
-    this._http.put<Tasca>(this.url+ id, tasca).subscribe(
-      res => {
-        this.esborrarObjecteArray(res);
-        if(!res.acabada || !res.acabada == undefined) { this.dataStore.tasques.unshift(res); }
-        this._tasques.next(Object.assign({}, this.dataStore).tasques);
-      },
-      err => this._gestorErrorsService.nouError(err)
+  actualitzarTasca(id: Number | String, tasca:Tasca): Observable<Tasca> {
+    return this._http.put<Tasca>(this.url+ id, tasca).pipe(
+      catchError(err => { 
+        this._gestorErrorsService.nouErrorTasques(err)
+        return throwError(err)
+      }),
+      map(tascaActualitzada => {
+        this.esborrarObjecteArray(tascaActualitzada);
+        if(!tascaActualitzada.acabada || !tascaActualitzada.acabada == undefined) { this.dataStore.tasques.unshift(tascaActualitzada); }
+        this.actualitzarStore()
+        this._gestorErrorsService.nouMissatgeTasques("S'ha guardat la tasca")
+        return tascaActualitzada
+      })
     )
   }
 
   /** DELETE */
-  esborrarTasca(id: Number | String) {
-    this._http.delete(this.url+ id).subscribe(
-      res => { 
-        this.esborrarObjecteArray(res)
-        this._tasques.next(Object.assign({}, this.dataStore).tasques);
-      },
-      err => {
-        this._gestorErrorsService.nouError(err)
-      }
+  esborrarTasca(id: Number | String): Observable<Tasca> {
+    return this._http.delete<Tasca>(this.url+ id).pipe(
+      catchError(err => { 
+        this._gestorErrorsService.nouErrorTasques(err)
+        return throwError(err)
+      }),
+      map(tascaEsborrada => {
+        this.esborrarObjecteArray(tascaEsborrada)
+        this.actualitzarStore()
+        this._gestorErrorsService.nouMissatgeTasques("S'ha esborrat la tasca")
+        return tascaEsborrada
+      })
     )
   }
 
@@ -90,5 +110,8 @@ export class TascaService {
     
     // Esborrar objecte
     this.dataStore.tasques.splice(indexEliminar, 1);
+  }
+  private actualitzarStore() {
+    this._tasques.next(Object.assign({}, this.dataStore).tasques);
   }
 }

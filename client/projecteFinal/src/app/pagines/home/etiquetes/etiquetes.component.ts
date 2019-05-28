@@ -1,8 +1,10 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { EtiquetaService } from 'src/app/serveis/etiqueta/etiqueta.service';
-import { MAT_DIALOG_DATA, MatDialogRef, MatDialog } from '@angular/material';
+import { MAT_DIALOG_DATA, MatDialogRef, MatDialog, MatSnackBar } from '@angular/material';
 import { Globals } from 'src/app/variablesGlobals';
 import { Etiqueta } from 'src/app/classes/etiqueta/etiqueta';
+import { Observable } from 'rxjs';
+import { GestorErrorsService } from 'src/app/serveis/gestorErrors/gestor-errors.service';
 
 @Component({
   selector: 'app-etiquetes',
@@ -11,57 +13,32 @@ import { Etiqueta } from 'src/app/classes/etiqueta/etiqueta';
 })
 export class EtiquetesComponent implements OnInit {
   mobileQuery;
-  etiquetes: Etiqueta[];
+  etiquetes$: Observable<Etiqueta[]>;
   etiquetaNova: Etiqueta;
   
-  constructor(private etiquetaService: EtiquetaService, public dialog: MatDialog) { }
+  constructor(private globals: Globals, private _etiquetaService: EtiquetaService, public dialog: MatDialog, private _snackBar: MatSnackBar, private _gestorErrors: GestorErrorsService) {
+    _gestorErrors.getMissatgeTasques().subscribe(missatge => this.openSnackBar(missatge))
+    _gestorErrors.getErrorTasques().subscribe(missatge => this.openSnackBar(missatge))
+  }
   
   ngOnInit() { 
     this.getEtiquetes();
+    this.etiquetes$ = this._etiquetaService.etiquetes$;
   }
 
-  novaEtiqueta(etiqueta: Etiqueta) {
-    this.etiquetaService.novaEtiqueta(etiqueta).subscribe(
-      res => {
-        this.etiquetes.push(res);
-      },
-      err => {
-        console.log(err)
-      }
-    )
-  }
-  esborarEtiqueta(id: Number) {
-    this.etiquetaService.esborrarEtiqueta(id).subscribe(
-      res => {
-        this.etiquetes = res;
-      },
-      err => {
-        console.log(err)
-      }
-    )
-  }
-  actualitzarEtiqueta(etiqueta: Etiqueta) {
-    this.etiquetaService.actualitzarEtiqueta(etiqueta._id, etiqueta).subscribe(
-      res => {
-        this.etiquetes = res;
-      },
-      err => {
-        
-      }
-    )
-  }
-  getEtiquetes() {
-    this.etiquetaService.getEtiquetes().subscribe(
-      res => {
-        console.log(res)
-        this.etiquetes = res;
-      },
-      err => {
-        alert(err)
-      }
-    )
-  }
+  novaEtiqueta(etiqueta: Etiqueta) { this._etiquetaService.novaEtiqueta(etiqueta).subscribe() }
+  esborarEtiqueta(id: Number) { this._etiquetaService.esborrarEtiqueta(id).subscribe() }
+  actualitzarEtiqueta(etiqueta: Etiqueta) { this._etiquetaService.actualitzarEtiqueta(etiqueta._id, etiqueta).subscribe() }
+  getEtiquetes() { this._etiquetaService.getEtiquetes().subscribe() }
 
+  openSnackBar(missatge: string, accio?: string) {
+    if(!accio) accio = 'Dacord'
+    if(missatge || missatge != '') {
+      this._snackBar.open(missatge, accio, {
+        duration: this.globals.tempsNotificacions,
+      });
+    }
+  }
   obrirDialog(): void {
     this.etiquetaNova = new Etiqueta;
     const dialogRef = this.dialog.open(DialogNovaEtiqueta, {

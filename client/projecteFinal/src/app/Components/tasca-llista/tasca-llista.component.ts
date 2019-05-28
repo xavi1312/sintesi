@@ -20,6 +20,6 @@ export class TascaLlistaComponent implements OnInit {
   }
   tascaFeta() {
     this.tasca.acabada = true;
-    this._tascaService.actualitzarTasca(this.tasca._id, this.tasca)
+    this._tascaService.actualitzarTasca(this.tasca._id, this.tasca).subscribe()
   }
 }

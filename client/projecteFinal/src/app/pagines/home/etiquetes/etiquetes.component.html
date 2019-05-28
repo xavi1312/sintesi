@@ -1,7 +1,7 @@
 <main class="container-fluid">
     <div class="row">
       <app-header class="col-12" (nouElement)="obrirDialog()" [titol]="'Etiquetes'"></app-header>
-      <app-etiqueta class="col-12" *ngFor="let etiqueta of etiquetes" [etiquta]="etiqueta" (editar)="actualitzarEtiqueta($event)" (eliminar)="esborarEtiqueta($event)"></app-etiqueta>
+      <app-etiqueta class="col-12" *ngFor="let etiqueta of etiquetes$ | async" [etiquta]="etiqueta" (editar)="actualitzarEtiqueta($event)" (eliminar)="esborarEtiqueta($event)"></app-etiqueta>
     </div>
   </main>
 <app-boto-fixe-bottom (nouElement)="obrirDialog()"></app-boto-fixe-bottom>

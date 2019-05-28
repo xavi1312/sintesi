@@ -9,22 +9,22 @@
             <app-select-autocompletat [etiquetes]="tasca.etiquetes" (canviEtiquetes)="canviEtiquetes($event)"></app-select-autocompletat>
         </div>
         <div class="d-none d-md-flex col-md-1 align-items-center justify-content-center">
-            <button mat-raised-button color="primary" (click)="guardarTasca()"><mat-icon>save</mat-icon></button>
+            <button mat-raised-button matTooltip="Guardar" color="primary" (click)="guardarTasca()"><mat-icon>save</mat-icon></button>
             <button mat-icon-button [matMenuTriggerFor]="menu">
                 <mat-icon>more_vert</mat-icon>
             </button>
             <mat-menu #menu="matMenu">
-            <button mat-menu-item *ngIf="isNova == false">
+            <button mat-menu-item *ngIf="isNova == false" (click)="esborrarTasca()">
                 <mat-icon>delete</mat-icon>
                 <span>Esborrar</span>
             </button>
             <button mat-menu-item *ngIf="!tasca.alarma; else isAlarma">
                 <mat-icon>alarm</mat-icon>
-                <span>Alarma</span>
+                <span>Recordatori</span>
             </button>
-            <button mat-menu-item *ngIf="tasca.alarma; else noAlarma">
+            <button mat-menu-item *ngIf="tasca.alarma; else noAlarma" (click)="tasca.alarma = null; actualitzarTasca()">
                 <mat-icon>alarm_off</mat-icon>
-                <span>Desactivar alarma</span>
+                <span>Desactivar recordatori</span>
             </button>
             </mat-menu>
                   

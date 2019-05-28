@@ -23,6 +23,7 @@ import {MatListModule} from '@angular/material/list';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import { MatAutocompleteModule } from '@angular/material';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 // Serveis
 import { AuditInterceptorService } from '../../serveis/interceptors/audit-interceptor.service';
@@ -73,7 +74,8 @@ import { SelectAutocompletatComponent } from 'src/app/Components/select-autocomp
     MatIconModule,
     MatDialogModule,
     MatListModule,
-    MatAutocompleteModule
+    MatAutocompleteModule,
+    MatSnackBarModule
   ],
   entryComponents: [EtiquetesComponent, DialogEditarEtiqueta, EtiquetaComponent , DialogNovaEtiqueta],
   bootstrap: [DialogEditarEtiqueta, DialogNovaEtiqueta],

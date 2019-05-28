@@ -6,4 +6,5 @@ import { Observable, of } from 'rxjs';
 export class Globals {
     rutaApi: string = 'http://localhost:3000/api';
     mobileSize: '600px';
+    tempsNotificacions: 2000;
 }
