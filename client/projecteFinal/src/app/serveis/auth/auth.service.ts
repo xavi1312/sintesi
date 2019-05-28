@@ -37,10 +37,6 @@ export class AuthService {
     }
   }
   public isAuth(): Boolean {
-    let isAuth = false;
-    
-    if(this.getToken() || this.getToken() != null) isAuth = true;
-
-    return isAuth;
+    return (this.getToken() || this.getToken() != null) ? true : false
   }
 }

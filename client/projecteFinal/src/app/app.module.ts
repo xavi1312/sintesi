@@ -25,11 +25,12 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatIconModule} from '@angular/material/icon';
 
+
 @NgModule({
   declarations: [
     AppComponent,
     IniciSessioComponent,
-    RegistreComponent
+    RegistreComponent    
   ],
   imports: [
     BrowserModule,

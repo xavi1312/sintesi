@@ -31,6 +31,10 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
 // Serveis
 import { AuditInterceptorService } from '../../serveis/interceptors/audit-interceptor.service';
 
+// Pipes
+import { BuscadorPipe } from 'src/app/pipes/buscador/buscador.pipe';
+import { OrdenarPipe } from 'src/app/pipes/ordenar/ordenar.pipe';
+
 // Components
 import { Globals } from '../../variablesGlobals';
 import { HomeComponent } from './home/home.component';
@@ -56,7 +60,11 @@ import { SelectAutocompletatComponent } from 'src/app/Components/select-autocomp
     HeaderComponent,
     TascaLlistaComponent,
     SelectAutocompletatComponent,
-    DialogAlarma
+    DialogAlarma,
+
+    // Pipes
+    BuscadorPipe,
+    OrdenarPipe,
   ],
   imports: [
     CommonModule,

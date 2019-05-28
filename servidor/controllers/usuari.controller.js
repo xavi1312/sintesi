@@ -23,8 +23,7 @@ authCtrl.register = async (req, res) => {
 
 /** Login d'un usuari */
 authCtrl.login = (req, res) => {
-  console.log(req.header)
-  User.find({ email: req.body.email }, (err, user) => {
+  User.findOne({ email: req.body.email }, (err, user) => {
     if(err) return res.status(500).send({ message: err });
     if(!user) return res.status(404).send({ message: `No existeix l'usuari` });
 
@@ -32,6 +31,16 @@ authCtrl.login = (req, res) => {
     res.status(200).send({ token: service.createToken(user) })
   })
 };
+
+/** Dades d'un usuari */
+authCtrl.dadesUsuari = (req, res) => {
+  User.findOne({usuari: req.user.sub}, 'email', (err, user) => {
+    if(err) return res.status(500).send({ message: err });
+    if(!user) return res.status(404).send({ message: `No existeix l'usuari` });
+
+    res.status(200).send(user)
+  })
+}
 
 /** BORRAR TOTA LA BD (DEV NOMÉS) */
 const Tasca = require('../models/tasca')
