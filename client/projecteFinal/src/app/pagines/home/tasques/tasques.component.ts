@@ -30,7 +30,7 @@ export class TasquesComponent implements OnInit {
     if(this.isParametre) {
       const param = this._route.snapshot.paramMap.get("data");
       
-      const data = (param === 'avui') ? moment().add(1, 'day').toString() : moment().add(7, 'days').toString()
+      const data = (param === 'avui') ? moment().startOf('day') : moment().add(7, 'days')
       
       this.tasques$ = this._tasquaService.tasques$.pipe(map(tasques => tasques.filter(tasca =>  this.filtreData(tasca.alarma, data)) ), share())
 
@@ -53,12 +53,12 @@ export class TasquesComponent implements OnInit {
     }
   }
 
-  private filtreData(alarma: string | Date, abansDe: string) {
-
+  private filtreData(alarma: string | Date, abansDe: string | Date | any) {
+    console.log(moment(alarma).locale('es').format('l'))
     if(alarma != undefined) {
-      const alarmaString = moment(alarma).toString()
-      
-      return (moment(alarma).isBefore(abansDe) && alarma != undefined)
+      let abans = moment(alarma).format('YYYY-MM-DD')
+      let despres = moment(abansDe).format('YYYY-MM-DD')
+      return (moment(abans).isSameOrBefore(despres) && alarma != undefined)
     }
     return false
   }
