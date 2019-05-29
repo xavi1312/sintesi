@@ -25,8 +25,9 @@ import {MatDialogModule} from '@angular/material/dialog';
 import {MatListModule} from '@angular/material/list';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
-import { MatAutocompleteModule } from '@angular/material';
+import { MatAutocompleteModule, MatSlideToggleModule } from '@angular/material';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {MatSelectModule} from '@angular/material/select';
 
 // Serveis
 import { AuditInterceptorService } from '../../serveis/interceptors/audit-interceptor.service';
@@ -75,6 +76,8 @@ import { SelectAutocompletatComponent } from 'src/app/Components/select-autocomp
 
     // Angular material
     MatInputModule,
+    MatSlideToggleModule,
+    MatSelectModule,
     MatFormFieldModule,
     MatDividerModule,
     MatMenuModule,

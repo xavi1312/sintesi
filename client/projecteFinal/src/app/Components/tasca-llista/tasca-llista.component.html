@@ -1,14 +1,16 @@
-<mat-card>
-  <mat-card-header (click)="editarTasca()">
-      <mat-card-title>{{tasca.nom}}</mat-card-title>
-      <mat-card-subtitle>{{tasca.alarma}}</mat-card-subtitle>
-  </mat-card-header>
-  <mat-card-actions class="d-flex justify-content-between">
-    <div class="etiquetesContaier">
-      <mat-chip-list>
-          <mat-chip *ngFor="let etiqueta of tasca.etiquetes">{{etiqueta.nom}}</mat-chip>
-      </mat-chip-list>
-    </div>
-    <button mat-flat-button color="primary" (click)="tascaFeta()">Done</button>
-  </mat-card-actions>
-</mat-card>
+<div class="pb-2">
+  <mat-card>
+    <mat-card-header (click)="editarTasca()">
+        <mat-card-title>{{tasca.nom}}</mat-card-title>
+        <mat-card-subtitle>{{tasca.alarma}}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-actions class="d-flex justify-content-between">
+      <div class="etiquetesContaier">
+        <mat-chip-list>
+            <mat-chip *ngFor="let etiqueta of tasca.etiquetes">{{etiqueta.nom}}</mat-chip>
+        </mat-chip-list>
+      </div>
+      <button mat-flat-button color="primary" (click)="tascaFeta()">Done</button>
+    </mat-card-actions>
+  </mat-card>
+</div>

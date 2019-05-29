@@ -1,9 +1,11 @@
-<main class="container">
-    <div class="row justify-content-center align-content-center">
-      <div class="caixa col-11 col-md-6">
-        <form class="row align-content-center justify-content-center p-3 h-100" [formGroup]="fomRegistre">
-          <h3 class="titol h2">Registre</h3>
-  
+<div class="container">
+  <div class="row justify-content-center cardRow">
+    <mat-card class="col-10 col-md-4">
+      <mat-card-header class="d-flex justify-content-center align-items-center">
+        <mat-card-title>Registre</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <form class="row align-content-center justify-content-center p-3 h-100" [formGroup]="fomRegistre">        
           <div class="col-12 inputGroup">
               <mat-form-field class="w-100">
                 <input matInput placeholder="Enter your email" formControlName="email" required>
@@ -42,6 +44,7 @@
               <span>No tens compte? </span><a [routerLink]="[ '/inici-sessio']">Iniciar sessió</a>
             </section>
         </form>
-      </div>
-    </div>
-  </main>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

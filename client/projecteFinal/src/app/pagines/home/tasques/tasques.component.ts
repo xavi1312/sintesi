@@ -9,6 +9,9 @@ import { GestorErrorsService } from 'src/app/serveis/gestorErrors/gestor-errors.
 import { Globals } from 'src/app/variablesGlobals';
 import { share, map } from 'rxjs/operators';
 import * as moment from 'moment';
+import { Etiqueta } from 'src/app/classes/etiqueta/etiqueta';
+import { EtiquetaService } from 'src/app/serveis/etiqueta/etiqueta.service';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-tasques',
@@ -17,10 +20,14 @@ import * as moment from 'moment';
 })
 export class TasquesComponent implements OnInit {
   tasques$: Observable<Tasca[]>;
+  etiquetes: Etiqueta;
   isParametre: Boolean;
+  etiquetesForm = new FormControl();
 
-  constructor(private globals: Globals, private _route: ActivatedRoute, private _router: Router, private _tasquaService: TascaService, private _snackBar: MatSnackBar, private _gestorErrors: GestorErrorsService) {
+  constructor(private globals: Globals, private _route: ActivatedRoute, private _router: Router, private _tasquaService: TascaService, private _snackBar: MatSnackBar, private _gestorErrors: GestorErrorsService, private _etiquetesService: EtiquetaService) {
     this._gestorErrors.getErrorTasques().subscribe(missatge => this.openSnackBar(missatge));
+    this._etiquetesService.getEtiquetes().subscribe()
+    this._etiquetesService.etiquetes$.subscribe(res => {this.etiquetes = res; console.log(res)});
 
     (_route.snapshot.paramMap.get("data")) ? this.isParametre = true : this.isParametre = false;
   }
