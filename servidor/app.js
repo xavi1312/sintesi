@@ -3,6 +3,10 @@ const app     = express();
 const morgan  = require('morgan');
 const config = require('./config/config');
 const cors = require('cors');
+const path = require('path');
+
+// Static field (angular compiled)
+app.use(express.static(path.join(__dirname, '../client/projecteFinal/dist/projecteFinal/')));
 
 // Settings
 app.set('port', config.port);
