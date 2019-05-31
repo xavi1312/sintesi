@@ -22,19 +22,25 @@ authCtrl.register = async (req, res) => {
 };
 
 /** Login d'un usuari */
-authCtrl.login = (req, res) => {
-  User.findOne({ email: req.body.email }, (err, user) => {
+authCtrl.login = async (req, res) => {
+   
+  const user = await User.findOne({ email: req.body.email }, (err, user) => {
     if(err) return res.status(500).send({ message: err });
     if(!user) return res.status(404).send({ message: `No existeix l'usuari` });
-
-    req.user = user;
-    res.status(200).send({ token: service.createToken(user) })
+    
+    return user
   })
+
+  const correcte = await service.decodePassowrd(req.body.contrasenya, user.contrasenya);  
+  if(!correcte) return res.status(401).send({message: "Contrasenya no valida"})
+  
+  req.user = user;
+  res.status(200).send({ token: service.createToken(user) })
 };
 
 /** Dades d'un usuari */
 authCtrl.dadesUsuari = (req, res) => {
-  User.findOne({usuari: req.user.sub}, 'email', (err, user) => {
+  User.findOne({_id: req.user.sub}, 'email', (err, user) => {
     if(err) return res.status(500).send({ message: err });
     if(!user) return res.status(404).send({ message: `No existeix l'usuari` });
 

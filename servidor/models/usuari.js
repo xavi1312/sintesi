@@ -12,8 +12,7 @@ const usuariSchema = Schema({
     },
     contrasenya: {
         type: String,
-        required: true,
-        select: false
+        required: true
     },
     tasques: [{
         type: Schema.Types.ObjectId, ref: 'Tasca'

@@ -10,7 +10,9 @@ import { Router } from '@angular/router';
 })
 export class RegistreComponent implements OnInit {
   fomRegistre: FormGroup;
-
+  hidePass: Boolean;
+  hidePass2: Boolean;
+  
   constructor(private formBuilder: FormBuilder, private authService: AuthService, private router: Router) { }
 
   ngOnInit() {

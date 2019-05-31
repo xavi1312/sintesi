@@ -7,8 +7,7 @@ const tascaSchema = Schema ({
         required: true
     },
     contingut: {
-        type: String,
-        required: true
+        type: String
     },
     acabada: {
         type: Boolean,

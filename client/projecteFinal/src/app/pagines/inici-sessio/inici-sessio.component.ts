@@ -11,6 +11,7 @@ import {Router} from '@angular/router';
 })
 export class IniciSessioComponent implements OnInit {
   fomIniciSessio: FormGroup;
+  hidePass: Boolean;
 
   constructor(private formBuilder: FormBuilder, private authService: AuthService, private router: Router) { }
 

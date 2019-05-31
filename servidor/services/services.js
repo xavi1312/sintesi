@@ -25,4 +25,13 @@ services.encodePassowrd = (password) => {
     return hash;
 }
 
+services.decodePassowrd = (password, hash) => {
+    // Bcrypt comproba la pass
+    const correcte = bcrypt.compare(password, hash).then((res) => {
+        return res;
+    });
+    
+    return correcte;
+}
+
 module.exports = services;

@@ -1,7 +1,7 @@
 $theme-colors: (
   "primary": #0074d9,
 );
-@import 'node_modules/bootstrap-material-design/scss/bootstrap-material-design.scss';
+@import 'node_modules/bootstrap/scss/bootstrap.scss';
 @import '~@angular/material/_theming';
 
 // NOTE: Theming is currently experimental and not yet publicly released!
