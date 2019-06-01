@@ -44,6 +44,7 @@ export class TascaComponent implements OnInit {
 
   tasca: Tasca;
   isNova: Boolean = true;
+  tempsAvis: number;
 
   guardar: BehaviorSubject<Boolean> = new BehaviorSubject<Boolean>(false);
 
@@ -51,6 +52,7 @@ export class TascaComponent implements OnInit {
     (_route.snapshot.params['id']) ? this.getTasca(_route.snapshot.params['id']) : this.tasca = new Tasca();
     _gestorErrors.getMissatgeTasques().subscribe(missatge => this.openSnackBar(missatge))
     _gestorErrors.getErrorTasques().subscribe(missatge => this.openSnackBar(missatge))
+    this.tempsAvis = this.globals.tempsNotificacions;
   }
   ngOnInit() { }
 
@@ -79,7 +81,7 @@ export class TascaComponent implements OnInit {
     if(!accio) accio = 'Dacord'
     if(missatge || missatge != '') {
       this._snackBar.open(missatge, accio, {
-        duration: this.globals.tempsNotificacions,
+        duration: this.tempsAvis,
       });
     }
   }

@@ -29,7 +29,8 @@
             <mat-toolbar-row>
                 <mat-icon (click)="sidenav.toggle()" *ngIf="mobileQuery.matches">menu</mat-icon>
                 <span class="example-spacer"></span>
-                <mat-icon class="example-icon" aria-hidden="false" aria-label="Example user verified icon">search</mat-icon>
+                <input type="text" class="buscador" placeholder="Buscar" [(ngModel)]="this.globals.buscador">
+                <!-- <mat-icon class="example-icon" aria-hidden="false" aria-label="Example user verified icon">search</mat-icon> -->
             </mat-toolbar-row>
         </mat-toolbar>
 

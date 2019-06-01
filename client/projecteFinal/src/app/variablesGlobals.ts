@@ -6,5 +6,6 @@ import { Observable, of } from 'rxjs';
 export class Globals {
     rutaApi: string = 'https://tranquil-inlet-16602.herokuapp.com/api';
     mobileSize: '600px';
-    tempsNotificacions: 2000;
+    tempsNotificacions:number = 2000;
+    buscador: string = '';
 }

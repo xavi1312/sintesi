@@ -15,10 +15,11 @@ export class EtiquetesComponent implements OnInit {
   mobileQuery;
   etiquetes$: Observable<Etiqueta[]>;
   etiquetaNova: Etiqueta;
-  
+  tempsAvis: number;
   constructor(private globals: Globals, private _etiquetaService: EtiquetaService, public dialog: MatDialog, private _snackBar: MatSnackBar, private _gestorErrors: GestorErrorsService) {
     _gestorErrors.getMissatgeTasques().subscribe(missatge => this.openSnackBar(missatge))
     _gestorErrors.getErrorTasques().subscribe(missatge => this.openSnackBar(missatge))
+    this.tempsAvis = this.globals.tempsNotificacions;
   }
   
   ngOnInit() { 
@@ -35,7 +36,7 @@ export class EtiquetesComponent implements OnInit {
     if(!accio) accio = 'Dacord'
     if(missatge || missatge != '') {
       this._snackBar.open(missatge, accio, {
-        duration: this.globals.tempsNotificacions,
+        duration: this.tempsAvis,
       });
     }
   }

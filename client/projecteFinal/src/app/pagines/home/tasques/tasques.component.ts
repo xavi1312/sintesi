@@ -22,6 +22,7 @@ export class TasquesComponent implements OnInit {
   tasques$: Observable<Tasca[]>;
   etiquetes: Etiqueta;
   isParametre: Boolean;
+  tempsAvis: number;
 
   etiquetesFiltre = '';
   dataFiltre = null;
@@ -35,6 +36,7 @@ export class TasquesComponent implements OnInit {
     this._gestorErrors.getErrorTasques().subscribe(missatge => this.openSnackBar(missatge));
     this._etiquetesService.getEtiquetes().subscribe()
     this._etiquetesService.etiquetes$.subscribe(res => this.etiquetes = res);
+    this.tempsAvis = this.globals.tempsNotificacions;
 
     (_route.snapshot.paramMap.get("data")) ? this.isParametre = true : this.isParametre = false;
   }
@@ -60,9 +62,9 @@ export class TasquesComponent implements OnInit {
 
   openSnackBar(missatge: string, accio?: string) {
     if(!accio) accio = 'Dacord'
-    if(missatge) {
+    if(missatge || missatge != '') {
       this._snackBar.open(missatge, accio, {
-        duration: this.globals.tempsNotificacions,
+        duration: this.tempsAvis,
       });
     }
   }
@@ -79,5 +81,5 @@ export class TasquesComponent implements OnInit {
 
   compareFn(etiqueta1: Etiqueta, etiqueta2: Etiqueta) {
     return etiqueta1 && etiqueta2 ? etiqueta1._id === etiqueta2._id : etiqueta1 === etiqueta2;
-}
+  }
 }

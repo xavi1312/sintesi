@@ -23,6 +23,8 @@ export class HomeComponent implements OnInit {
     this.mobileQuery.addListener(this._mobileQueryListener);
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.http.get<Usuari>(`${this.globals.rutaApi}/auth/dadesUsuari`).subscribe(res => this.correuUsuari = res.email, err => {console.log("error "+err);})
+
+    
   }
   
   ngOnInit() { 

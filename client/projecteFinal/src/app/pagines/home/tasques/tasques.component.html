@@ -18,7 +18,7 @@
         </div>
       </div>
       <div class="tasquesContainer col-12 col-md-6 condicionatsAltura">
-        <app-tasca-llista class="w-100" *ngFor="let tasca of (tasques$ | async) | ordenar: invertirOrdreFiltre:estat:dataFiltre:etiquetesFiltre" [tasca]="tasca"></app-tasca-llista>
+        <app-tasca-llista class="w-100" *ngFor="let tasca of (tasques$ | async) | ordenar: invertirOrdreFiltre:estat:dataFiltre:etiquetesFiltre | buscador: this.globals.buscador" [tasca]="tasca"></app-tasca-llista>
       </div>
   </div>
 </main>
