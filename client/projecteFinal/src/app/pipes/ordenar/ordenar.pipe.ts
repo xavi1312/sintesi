@@ -21,7 +21,6 @@ export class OrdenarPipe implements PipeTransform {
         return etiquetes.some(et => etiquetesFiltre.indexOf(et.nom) >= 0)
       })
     }
-    console.log(tasquesFiltrat)
     switch(estat){
       case 'nom'    : tasquesFiltrat = tasquesFiltrat.sort( (a:Tasca, b:Tasca) => {return (a.nom < b.nom) ?  -1 :  1; });break;
       default       : tasquesFiltrat = tasquesFiltrat.sort( (a:Tasca, b:Tasca) => {return (a._id < b._id) ?  -1 :  1; });break;

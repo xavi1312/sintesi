@@ -63,7 +63,6 @@ export class TascaService {
       }),
       map(novaTasca => {
         this.dataStore.tasques.unshift(novaTasca)
-        console.log(this.dataStore.tasques)
         this.actualitzarStore()
         this._gestorErrorsService.nouMissatgeTasques("S'ha guardat la tasca")
         return novaTasca

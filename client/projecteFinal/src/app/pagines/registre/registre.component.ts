@@ -48,7 +48,6 @@ export class RegistreComponent implements OnInit {
   registre(form):void {
     this.authService.registre(form).subscribe(
     res => {
-      alert('')
       this.authService.nouToken(res);
       this.router.navigateByUrl('');
     }
