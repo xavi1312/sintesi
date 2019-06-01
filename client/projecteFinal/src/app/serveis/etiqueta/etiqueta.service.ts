@@ -102,6 +102,7 @@ export class EtiquetaService {
     this.dataStore.etiquetes.splice(indexEliminar, 1);
   }
   private actualitzarStore() {
-    this._etiquetes.next(Object.assign({}, this.dataStore).etiquetes);
+    let a = Object.assign({}, this.dataStore)
+    this._etiquetes.next(a.etiquetes);
   }
 }

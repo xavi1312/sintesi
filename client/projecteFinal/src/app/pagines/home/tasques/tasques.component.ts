@@ -22,12 +22,19 @@ export class TasquesComponent implements OnInit {
   tasques$: Observable<Tasca[]>;
   etiquetes: Etiqueta;
   isParametre: Boolean;
-  etiquetesForm = new FormControl();
 
+  etiquetesFiltre = '';
+  dataFiltre = null;
+  invertirOrdreFiltre = false;
+  estat = 'asd';
+
+  invertirFiltre() {
+    this.invertirOrdreFiltre = !this.invertirOrdreFiltre;
+  }
   constructor(private globals: Globals, private _route: ActivatedRoute, private _router: Router, private _tasquaService: TascaService, private _snackBar: MatSnackBar, private _gestorErrors: GestorErrorsService, private _etiquetesService: EtiquetaService) {
     this._gestorErrors.getErrorTasques().subscribe(missatge => this.openSnackBar(missatge));
     this._etiquetesService.getEtiquetes().subscribe()
-    this._etiquetesService.etiquetes$.subscribe(res => {this.etiquetes = res; console.log(res)});
+    this._etiquetesService.etiquetes$.subscribe(res => this.etiquetes = res);
 
     (_route.snapshot.paramMap.get("data")) ? this.isParametre = true : this.isParametre = false;
   }
@@ -61,7 +68,7 @@ export class TasquesComponent implements OnInit {
   }
 
   private filtreData(alarma: string | Date, abansDe: string | Date | any) {
-    console.log(moment(alarma).locale('es').format('l'))
+    
     if(alarma != undefined) {
       let abans = moment(alarma).format('YYYY-MM-DD')
       let despres = moment(abansDe).format('YYYY-MM-DD')
@@ -69,4 +76,8 @@ export class TasquesComponent implements OnInit {
     }
     return false
   }
+
+  compareFn(etiqueta1: Etiqueta, etiqueta2: Etiqueta) {
+    return etiqueta1 && etiqueta2 ? etiqueta1._id === etiqueta2._id : etiqueta1 === etiqueta2;
+}
 }

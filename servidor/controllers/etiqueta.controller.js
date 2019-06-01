@@ -6,10 +6,9 @@ const etiquetaCtrl = {}
 etiquetaCtrl.getAll = (req, res) => {
     const idUsuari = req.user.sub
 
-    Etiqueta.find({}).populate('tasques','nom _id').where('usuari').equals(idUsuari)
-    .exec((err, etiquetes) => {
+    Etiqueta.find({usuari: idUsuari}).exec((err, etiquetes) => {
         if(err) return req.status(500).send({message: `No s'han trobat etiquetes: ${err}`})
-
+        console.log(etiquetes)
         res.status(200).send(etiquetes)
     });
 }
@@ -30,7 +29,7 @@ etiquetaCtrl.unaEtiqueta = (req, res) => {
 
 /** Crear una sola etiqueta */
 etiquetaCtrl.novaEtiqueta = (req, res) => {
-    const etiqueta = new Etiqueta({nom: req.body.nom})
+    const etiqueta = new Etiqueta({nom: req.body.nom, usuari: req.user.sub})
     if(req.body.tasques) etiqueta.tasques = req.body.tasques
 
     etiqueta.save((err, novaEtiqueta) => {

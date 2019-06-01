@@ -5,8 +5,11 @@ const uniqueValidator = require('mongoose-unique-validator');
 const etiquetaSchema = Schema ({
     nom: {
         type: String,
+        required: true
+    },
+    usuari: {
+        type: String,
         required: true,
-        unique: true
     },
     tasques: [{
         type: Schema.Types.ObjectId, ref: 'Tasca'

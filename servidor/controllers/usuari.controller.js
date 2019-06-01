@@ -47,8 +47,8 @@ authCtrl.dadesUsuari = (req, res) => {
     res.status(200).send(user)
   })
 }
-
 /** BORRAR TOTA LA BD (DEV NOMÉS) */
+/*
 const Tasca = require('../models/tasca')
 const Etiqueta = require('../models/etiqueta')
 
@@ -67,7 +67,7 @@ authCtrl.borrarTot = async (req, res) => {
 
   res.status(200).send({message: `S'HA BORRAT TOT AMB EXIT`})
 }
-
+*/
 
 
 module.exports = authCtrl;

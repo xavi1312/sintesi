@@ -1,47 +1,8 @@
-<!--<main class="container-fluid">
-  <div class="row">
-    <section class="col-3 bg-dark">
-
-    </section>
-    <article class="col-9">
-      <div class="row justify-content-center">
-        <div class="col-6 h-75 d-flex flex-wrap align-items-center justify-content-center">
-          <form class="w-100" [formGroup]="fomIniciSessio">
-  
-            <mat-form-field class="w-100 p-2">
-              <input matInput placeholder="Enter your email" formControlName="email" required>
-              <mat-error *ngIf="fomIniciSessio.controls['email'].hasError('required')">
-                Email <strong>necessari</strong>
-              </mat-error>
-            </mat-form-field>
-  
-            <mat-form-field class="w-100 p-2">
-              <input matInput placeholder="Enter your password" [type]="hidePass ? 'text' : 'password'" formControlName="contrasenya" required>
-              <mat-icon matSuffix (click)="hidePass = !hidePass">{{hidePass ? 'visibility' : 'visibility_off'}}</mat-icon>
-              <mat-error *ngIf="fomIniciSessio.controls['contrasenya'].hasError('required')">
-                Contraseya <strong>necessaria</strong>
-              </mat-error>
-            </mat-form-field>
-  
-            <button mat-raised-button color="primary" class="w-100 mt-2" (click)="enviar()">
-              Login
-              <mat-icon class="pl-2">arrow_right_alt</mat-icon>
-            </button>
-  
-          </form>
-        </div>
-        <section class="col-12 h-25">
-
-        </section>
-      </div>
-    </article>
-  </div>
-</main>-->
 <div class="container">
   <div class="row justify-content-center cardRow">
     <mat-card class="col-10 col-md-4">
       <mat-card-header class="d-flex justify-content-center align-items-center">
-        <mat-card-title>Registre</mat-card-title>
+        <mat-card-title>Inici Sessió</mat-card-title>
       </mat-card-header>
       <mat-card-content>
         <form class="row align-content-center justify-content-center p-3 h-100" [formGroup]="fomIniciSessio">        
@@ -66,7 +27,7 @@
 
             <button mat-raised-button color="primary" class="col-10 mt-2 mb-4" (click)="enviar()">Enviar</button>
             <section class="registreContainer">
-              <span>No tens compte? </span><a [routerLink]="[ '/inici-sessio']">Iniciar sessió</a>
+              <span>No tens compte? </span><a [routerLink]="[ '/registre']">Registrar-se</a>
             </section>
         </form>
       </mat-card-content>

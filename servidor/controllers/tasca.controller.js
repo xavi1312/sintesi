@@ -39,7 +39,7 @@ tascaCtrl.novaTasca = (req, res) => {
     tasca.save((err) => {
         if(err) return res.status(500).send({message: `s'ha produït un error al guardar la tasca: ${err}`});
     
-        res.status(200).send({message: "La tasca s'ha creat amb exit"});
+        res.status(200).send(tasca);
     });
 }
 
