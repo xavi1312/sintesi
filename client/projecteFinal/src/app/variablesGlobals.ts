@@ -4,7 +4,7 @@ import { Observable, of } from 'rxjs';
 
 @Injectable()
 export class Globals {
-    rutaApi: string = 'http://localhost:3000/api';
+    rutaApi: string = 'http://speedquiz.cat/gtasks/servidor:17783/api';
     mobileSize: '600px';
     tempsNotificacions: 2000;
 }

@@ -12,7 +12,7 @@ app.use(express.static(path.join(__dirname, '../client/projecteFinal/dist/projec
 app.set('port', config.port);
 
 // Middlewares
-app.use(cors());
+//app.use(cors());
 app.use(morgan('dev'));
 app.use(express.json());
 app.disable('etag');
