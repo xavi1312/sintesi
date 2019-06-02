@@ -103,7 +103,7 @@ body {
 } 
 
 /* Component */
-.container-fluid {
+.container-fluid, .contenidor {
   --navBar: 56px;
   --contenidor: calc(100vh - var(--navBar));
 
@@ -114,6 +114,11 @@ body {
     --navBar: 64px;
     height: var(--contenidor);
   }
+}
+.contenidor {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .condicionatsAltura {
   height: calc(var(--contenidor) - 100px);

@@ -1,4 +1,4 @@
-<main class="container-fluid" *ngIf="tasca != undefined || tasca != null">
+<main class="container-fluid" *ngIf="modulCarregat; else noCarregat">
     <div class="row pt-3">
         <div class="col-12 col-md-5">
             <mat-form-field class="w-100 inputNom">
@@ -43,3 +43,9 @@
     </button>
 </ng-template>
 
+<!-- Carregant -->
+<ng-template #noCarregat>
+    <div class="contenidor">
+        <mat-spinner></mat-spinner>
+    </div>
+</ng-template>

@@ -43,8 +43,9 @@ const PW_DATE_FORMATS = {
 export class TascaComponent implements OnInit {
 
   tasca: Tasca;
-  isNova: Boolean = true;
+  isNovaTasca: Boolean = true;
   tempsAvis: number;
+  modulCarregat: Boolean = false;
 
   guardar: BehaviorSubject<Boolean> = new BehaviorSubject<Boolean>(false);
 
@@ -53,23 +54,20 @@ export class TascaComponent implements OnInit {
     _gestorErrors.getMissatgeTasques().subscribe(missatge => this.openSnackBar(missatge))
     _gestorErrors.getErrorTasques().subscribe(missatge => this.openSnackBar(missatge))
     this.tempsAvis = this.globals.tempsNotificacions;
+    // Temps que darda en carregar l'editor
+    setTimeout(() => { this.modulCarregat = true; }, 3500)
   }
   ngOnInit() { }
 
   getTasca(id: String | Number) {
-    this.isNova = false;
+    this.isNovaTasca = false;
     this._tasquaService.getTasca(id).subscribe(res => {
       this.tasca = new Tasca(); this.tasca= Object.assign(this.tasca, res);
     })
   }
 
   guardarTasca() {
-    if(this.isNova) {
-      this._tasquaService.novaTasca(this.tasca).subscribe()
-    }
-    else {
-      this.actualitzarTasca()
-    }
+    (this.isNovaTasca) ? this._tasquaService.novaTasca(this.tasca).subscribe() : this.actualitzarTasca()
   }
   esborrarTasca() { this._tasquaService.esborrarTasca(this.tasca._id).subscribe(res => this._router.navigateByUrl('')) }
   actualitzarTasca() { this._tasquaService.actualitzarTasca(this.tasca._id, this.tasca).subscribe() }
@@ -79,7 +77,8 @@ export class TascaComponent implements OnInit {
 
   openSnackBar(missatge: string, accio?: string) {
     if(!accio) accio = 'Dacord'
-    if(missatge || missatge != '') {
+    if(missatge && missatge != '') {
+      console.log(missatge)
       this._snackBar.open(missatge, accio, {
         duration: this.tempsAvis,
       });

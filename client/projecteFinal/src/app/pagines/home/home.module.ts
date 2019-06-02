@@ -28,6 +28,7 @@ import {MatInputModule} from '@angular/material/input';
 import { MatAutocompleteModule, MatSlideToggleModule } from '@angular/material';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatSelectModule} from '@angular/material/select';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 // Serveis
 import { AuditInterceptorService } from '../../serveis/interceptors/audit-interceptor.service';
@@ -91,6 +92,7 @@ import { SelectAutocompletatComponent } from 'src/app/Components/select-autocomp
     MatListModule,
     MatAutocompleteModule,
     MatSnackBarModule,
+    MatProgressSpinnerModule,
 
     // Datetime picker
     MatDatepickerModule,
