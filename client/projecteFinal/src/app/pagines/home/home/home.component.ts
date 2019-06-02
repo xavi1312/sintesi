@@ -18,7 +18,7 @@ export class HomeComponent implements OnInit {
   mobileQuery;
   private _mobileQueryListener: () => void;
   
-  constructor(private media: MediaMatcher, private changeDetectorRef: ChangeDetectorRef, private authService: AuthService, private globals: Globals, private http: HttpClient) {
+  constructor(private media: MediaMatcher, private changeDetectorRef: ChangeDetectorRef, private authService: AuthService, public globals: Globals, private http: HttpClient) {
     this.mobileQuery = this.media.matchMedia('(max-width: 600px)');
     this.mobileQuery.addListener(this._mobileQueryListener);
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();

@@ -9,34 +9,31 @@
           <div class="col-12 inputGroup">
               <mat-form-field class="w-100">
                 <input matInput placeholder="Enter your email" formControlName="email" required>
-                <mat-error *ngIf="fomRegistre.controls['email'].hasError('required')">
-                  Email <strong>necessari</strong>
-                </mat-error>
+                <mat-error *ngIf="fomRegistre.invalid">{{getEmailErrors()}}</mat-error>
               </mat-form-field>
             </div>
         
             <div class="col-12 inputGroup">
-                <mat-form-field class="w-100">
+                <mat-form-field class="w-100" hintLabel="Min 5 caracters">
                   <input matInput placeholder="Enter your password" [type]="hidePass ? 'text' : 'password'" formControlName="contrasenya" required>
                   <mat-icon matSuffix (click)="hidePass = !hidePass">{{hidePass ? 'visibility' : 'visibility_off'}}</mat-icon>
-                  <mat-error *ngIf="fomRegistre.controls['contrasenya'].hasError('required')">
-                    Contraseya <strong>necessaria</strong>
-                  </mat-error>
+                  <mat-error *ngIf="fomRegistre.invalid">{{getContra1Errors()}}</mat-error>
                 </mat-form-field>
             </div>
             
             <div class="col-12 inputGroup">
-                <mat-form-field class="w-100">
+                <mat-form-field class="w-100" hintLabel="Min 5 caracters">
                   <input matInput placeholder="Enter your password" [type]="hidePass2 ? 'text' : 'password'" formControlName="contrasenya2" required>
                   <mat-icon matSuffix (click)="hidePass2 = !hidePass2">{{hidePass2 ? 'visibility' : 'visibility_off'}}</mat-icon>
-                  <mat-error *ngIf="fomRegistre.controls['contrasenya2'].hasError('required')">
-                    Verificació contrasenya <strong>necessaria</strong>
-                  </mat-error>
+                  <mat-error *ngIf="fomRegistre.invalid">{{getContra2Errors()}}</mat-error>
                 </mat-form-field>
             </div>
         
-            <div class="col-12 inputGroup d-flex align-items-center justify-content-center">
-              <mat-checkbox class="w-100" formControlName="politica" required>Accepto la politica de privacitat</mat-checkbox>
+            <div class="col-12 inputGroup d-flex flex-wrap align-items-center justify-content-center">
+              <mat-checkbox class="w-100" formControlName="politica" [required]="'true'" required>Accepto la 
+                <a [routerLink]="[ '/politica-privacitat']">politica de privacitat</a>
+              </mat-checkbox>
+              <mat-error *ngIf="fomRegistre.invalid">{{getPoliticaErrors()}}</mat-error>
             </div>
 
             <button mat-raised-button color="primary" class="col-10 mt-2 mb-4" (click)="enviar()">Enviar</button>

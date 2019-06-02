@@ -16,7 +16,7 @@ export class EtiquetesComponent implements OnInit {
   etiquetes$: Observable<Etiqueta[]>;
   etiquetaNova: Etiqueta;
   tempsAvis: number;
-  constructor(private globals: Globals, private _etiquetaService: EtiquetaService, public dialog: MatDialog, private _snackBar: MatSnackBar, private _gestorErrors: GestorErrorsService) {
+  constructor(public globals: Globals, private _etiquetaService: EtiquetaService, public dialog: MatDialog, private _snackBar: MatSnackBar, private _gestorErrors: GestorErrorsService) {
     _gestorErrors.getMissatgeTasques().subscribe(missatge => this.openSnackBar(missatge))
     _gestorErrors.getErrorTasques().subscribe(missatge => this.openSnackBar(missatge))
     this.tempsAvis = this.globals.tempsNotificacions;

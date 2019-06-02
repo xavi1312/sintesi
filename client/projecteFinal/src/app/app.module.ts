@@ -24,13 +24,15 @@ import {MatInputModule} from '@angular/material/input';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatIconModule} from '@angular/material/icon';
-
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { PoliticaComponent } from './pagines/politica/politica.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     IniciSessioComponent,
-    RegistreComponent    
+    RegistreComponent,
+    PoliticaComponent    
   ],
   imports: [
     BrowserModule,
@@ -48,7 +50,8 @@ import {MatIconModule} from '@angular/material/icon';
     MatFormFieldModule,
     MatIconModule,
     MatTooltipModule,
-    MatCardModule
+    MatCardModule,
+    MatSnackBarModule
   ],
   providers: [ Globals, {provide: HTTP_INTERCEPTORS, useClass: AuditInterceptorService, multi: true}  ],
   bootstrap: [AppComponent],

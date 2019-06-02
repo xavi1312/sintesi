@@ -32,7 +32,7 @@ export class TasquesComponent implements OnInit {
   invertirFiltre() {
     this.invertirOrdreFiltre = !this.invertirOrdreFiltre;
   }
-  constructor(private globals: Globals, private _route: ActivatedRoute, private _router: Router, private _tasquaService: TascaService, private _snackBar: MatSnackBar, private _gestorErrors: GestorErrorsService, private _etiquetesService: EtiquetaService) {
+  constructor(public globals: Globals, private _route: ActivatedRoute, private _router: Router, private _tasquaService: TascaService, private _snackBar: MatSnackBar, private _gestorErrors: GestorErrorsService, private _etiquetesService: EtiquetaService) {
     this._gestorErrors.getErrorTasques().subscribe(missatge => this.openSnackBar(missatge));
     this._etiquetesService.getEtiquetes().subscribe()
     this._etiquetesService.etiquetes$.subscribe(res => this.etiquetes = res);
